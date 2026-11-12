@@ -21,8 +21,11 @@ window.WS = {
          listing_id:"entry.1537325726", details:"entry.1580865132", source:"entry.91940802", visitor:"entry.1708295650" },
   // Click tracking form (same one V1 used)
   ev: { action: "https://docs.google.com/forms/d/e/1FAIpQLSfmsDOBIS9sDn1g127_UzMHDIFaQm6YSl2ouDsNxVybb0_oiA/formResponse",
-        event:"entry.711759269", feature:"entry.1522735470", source:"entry.538164258", visitor:"entry.2039572591" },
-  replyTime: "12 hours"
+        event:"entry.711759269", feature:"entry.1522735470", source:"entry.538164258", visitor:"entry.2039572591",
+        device:"entry.1405394149", referrer:"entry.355767246" },  // stored in the form's "role" and "month" columns
+  replyTime: "12 hours",
+  ga4: "",      // Google Analytics 4 measurement ID, e.g. "G-ABC123XYZ"
+  clarity: ""   // Microsoft Clarity project ID (heatmaps + session replays), e.g. "abcd1234ef"
 };
 </script>
 <style>
@@ -183,6 +186,9 @@ input[type=range]{accent-color:var(--brand);width:100%}
 .note{background:var(--gold-l);color:#7A4E0E;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:8px 0 14px}
 .x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:17px;border:none;background:var(--soft);cursor:pointer;font-size:18px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:70;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+.consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:80;max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--mute)}
+.consent b{color:var(--ink)} .consent .row{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:640px){.consent{bottom:calc(72px + env(safe-area-inset-bottom))}}
 footer{border-top:1px solid var(--line);padding:22px 0 100px;color:var(--mute);font-size:13px;background:#fff}
 footer .wrap{display:flex;flex-direction:column;gap:6px}
 .loading{grid-column:1/-1;color:var(--mute);padding:30px 0;text-align:center}
@@ -224,7 +230,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
 <footer><div class="wrap">
   <span><b>White Stone</b> is a student-run pilot at BYU for Winter 2027 contract transfers in Provo and Orem. It's free for students; we never take payment.</span>
-  <span>We help buyers and sellers find each other. The complex office completes every transfer. We count anonymous taps to learn which features matter. <a href="#/how">How it works</a> · <a href="demo.html">See the full app concept</a></span>
+  <span>We help buyers and sellers find each other. The complex office completes every transfer. We count anonymous taps to learn which features matter. <a href="#/how">How it works</a> · <a href="demo.html">See the full app concept</a> · <button class="link" data-consent-open style="font-size:13px">Cookie settings</button></span>
 </div></footer>
 
 <nav class="tabs" id="tabs">
@@ -244,11 +250,16 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 const params=new URLSearchParams(location.search);
 const SRC=(params.get('src')||params.get('utm_source')||store.get('ws_src','direct')).toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30)||'direct';
 store.set('ws_src',SRC);
+if(params.has('team'))store.set('ws_team',true); if(params.has('notteam'))store.set('ws_team',false);
+const TEAM=!!store.get('ws_team',false);
+const DEVICE=(()=>{const w=Math.min(screen.width||innerWidth,innerWidth);return w<700?'phone':w<1100?'tablet':'desktop'})();
+let REF=store.get('ws_ref',null); if(REF===null){try{const h=document.referrer?new URL(document.referrer).hostname:'';REF=h&&h!==location.hostname?h.replace(/^www\./,'').replace(/^(l|m|lm)\.facebook\.com$/,'facebook.com'):'none'}catch(e){REF='none'} store.set('ws_ref',REF)}
 let VID=store.get('ws_vid',''); if(!VID){VID=Math.random().toString(36).slice(2,10);store.set('ws_vid',VID)}
 const DEBUG=params.has('debug');
 function post(cfg,fields){ if(!cfg.action)return; const fd=new FormData(); Object.entries(fields).forEach(([k,v])=>{if(cfg[k]&&v!=null)fd.append(cfg[k],String(v))}); try{fetch(cfg.action,{method:'POST',mode:'no-cors',body:fd,keepalive:true}).catch(()=>{})}catch(e){} if(DEBUG)console.log('[post]',fields); }
-function track(event,feature){ post(WS.ev,{event,feature:feature||'',source:SRC,visitor:VID}); }
-function submit(kind,o){ post(WS.sub,Object.assign({kind,source:SRC,visitor:VID},o)); track('submit-'+kind,o.listing_id||''); }
+function track(event,feature){ post(WS.ev,{event,feature:feature||'',source:TEAM?'team':SRC,visitor:VID,device:DEVICE,referrer:REF}); gaEvent(event,feature); }
+function gaEvent(name,feature){ if(!window.gtag||!WS.ga4||store.get('ws_consent','')!=='yes')return; const n=('ws_'+name).replace(/[^a-zA-Z0-9_]/g,'_').slice(0,40); try{gtag('event',n,{feature:String(feature||'').slice(0,100),ws_source:TEAM?'team':SRC})}catch(e){} }
+function submit(kind,o){ if(o.details)o.details+=` | device: ${DEVICE} | ref: ${REF}`; post(WS.sub,Object.assign({kind,source:TEAM?'team':SRC,visitor:VID},o)); track('submit-'+kind,o.listing_id||''); }
 let toastT; function toast(m){let t=$('#toast'); if(!t){t=document.createElement('div');t.id='toast';t.className='toast';t.setAttribute('role','status');document.body.appendChild(t)} t.textContent=m; t.style.display='block'; clearTimeout(toastT); toastT=setTimeout(()=>t.style.display='none',2600)}
 function toISO(s){s=String(s||'').trim();if(!s)return '';if(/^\d{4}-\d{1,2}-\d{1,2}/.test(s)){const[y,m,d]=s.split(/[-T ]/);return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`}const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);if(m){const y=m[3].length===2?'20'+m[3]:m[3];return `${y}-${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}`}const d=new Date(s);return isNaN(d)?'':d.toISOString().slice(0,10)}
 const fmtD=s=>{const d=new Date(toISO(s)+'T12:00');return isNaN(d)?String(s||''):d.toLocaleDateString('en-US',{month:'short',day:'numeric'})};
@@ -408,7 +419,7 @@ function vContact(id){
   if(failed){ html+=`<div class="b bot">${esc(failed.why)} I can email you when a contract that fits is posted, or match you with others now.</div>`;
     foot=`<div class="opts"><a class="btn" href="#/match" data-t="screen-fail-match">See better matches</a><button class="btn ghost" data-alert="screen-fail">Email me new contracts</button><button class="link" data-restart>Start over</button></div>`; }
   else if(passed && !CH.sent){ html+=`<div class="b bot">You're a great fit. Where should ${esc(l.seller_first_name||'the seller')} reach you?</div>`;
-    foot=`<form id="cf" class="opts" style="flex-direction:column;align-items:stretch" novalidate>
+    foot=`<form id="cf" data-clarity-mask="true" class="opts" style="flex-direction:column;align-items:stretch" novalidate>
       <div class="row2"><div class="field" style="margin:0"><label for="cn">First name</label><input id="cn" autocomplete="given-name" required></div><div class="field" style="margin:0"><label for="cp">Phone <span class="hint">(fastest)</span></label><input id="cp" type="tel" autocomplete="tel" placeholder="801-555-0123"></div></div>
       <div class="field" style="margin:0"><label for="ce">Email</label><input id="ce" type="email" autocomplete="email" placeholder="you@byu.edu" required></div>
       <div class="field" style="margin:0"><label for="cm">Message <span class="hint">(optional)</span></label><input id="cm" placeholder="When can I see it?"></div>
@@ -452,7 +463,7 @@ function vPost(){
     ${inp('why','Why you\'re leaving',{hint:'(optional, builds trust)',ph:'Spring internship in Seattle'})}
     <div class="err" id="perr">Add the monthly rent.</div>
     <div class="navrow"><button class="btn ghost" data-pback>Back</button><button class="btn" data-pnext>Next</button></div>`;
-  if(s===3) body=`<h1 class="title">You</h1><p class="sub">Step 3 of 3 · only your first name is shown on the listing</p>${bar}
+  if(s===3) body=`<div data-clarity-mask="true"><h1 class="title">You</h1><p class="sub">Step 3 of 3 · only your first name is shown on the listing</p>${bar}
     <div class="row2">${inp('name','First name',{req:1,ac:'given-name'})}${inp('phone','Phone',{hint:'(fastest)',type:'tel',ac:'tel'})}</div>
     ${inp('email','School email',{req:1,type:'email',ph:'you@byu.edu',ac:'email'})}
     <label class="check"><input type="checkbox" data-pc="crosspost" ${P.d.crosspost?'checked':''}><span><b>Share it to the BYU/UVU Facebook groups and KSL for me</b><span>Free. We post it and send every reply back to you.</span></span></label>
@@ -460,7 +471,7 @@ function vPost(){
     <label class="check"><input type="checkbox" data-pc="agree" ${P.d.agree?'checked':''}><span><b>This is my contract and I'm allowed to transfer it</b><span>The complex office approves and completes the transfer.</span></span></label>
     <div class="box" style="margin:6px 0 14px"><b>${esc(P.d.complex||'Your complex')} · ${esc(P.d.room)} room</b><div class="meta">$${ptotal()}/mo total · ${P.d.start?fmtD(P.d.start):'?'} – ${P.d.end?fmtD(P.d.end):'?'} · ${P.d.rule==='BYU'?'BYU-contracted':'Open to all'} · ${esc(P.d.gender)}</div></div>
     <div class="err" id="perr">Add your first name, a valid email, and check the last box.</div>
-    <div class="navrow"><button class="btn ghost" data-pback>Back</button><button class="btn" data-psubmit>Submit my contract</button></div>`;
+    <div class="navrow"><button class="btn ghost" data-pback>Back</button><button class="btn" data-psubmit>Submit my contract</button></div></div>`;
   return `<div class="formwrap wrap">${body}</div>`;
 }
 function postValid(){const d=P.d;if(P.step===1)return d.complex&&d.start&&d.end&&d.end>d.start;if(P.step===2)return num(d.rent)>0;return d.name&&emailOk(d.email||'')&&d.agree}
@@ -486,7 +497,7 @@ function vMatch(){
     res=`<div class="panel" style="margin-top:18px"><h3>${R.length?`${R.length} contract${R.length===1?'':'s'} that fit`:'Nothing fits yet'}</h3><p class="sub">${R.length?'Ranked by budget, dates, length, campus and your must-haves.':'New contracts come in daily. Let us look for you.'}</p>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">${R.map(x=>`<a class="mrow" href="#/l/${encodeURIComponent(x.l.id)}" data-t="match-open" data-f="${esc(x.l.id)}"><div class="im">${x.l.photos[0]?`<img src="${esc(x.l.photos[0])}" alt="">`:ini(x.l)}</div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.l.complex)}</b><span class="score">${x.score}% fit</span></div><span class="meta">$${x.l.total}/mo · ${x.l.dates}</span><div class="why">${x.why.slice(0,3).map(w=>`<span>${/over|Different|Runs|Closer/.test(w)?'•':'✓'} ${esc(w)}</span>`).join('')}</div></div></a>`).join('')}</div></div>
     <div class="panel" style="margin-top:14px;border-color:var(--brand)"><h3>Want us to find one for you?</h3><p class="sub">A person on our team checks the BYU/UVU groups, KSL and new posts every day and texts or emails you matches. Free.</p>
-      <form id="mf" novalidate style="margin-top:12px"><div class="row2"><div class="field"><label for="mn">First name</label><input id="mn" autocomplete="given-name"></div><div class="field"><label for="mp">Phone <span class="hint">(optional)</span></label><input id="mp" type="tel" autocomplete="tel"></div></div>
+      <form id="mf" data-clarity-mask="true" novalidate style="margin-top:12px"><div class="row2"><div class="field"><label for="mn">First name</label><input id="mn" autocomplete="given-name"></div><div class="field"><label for="mp">Phone <span class="hint">(optional)</span></label><input id="mp" type="tel" autocomplete="tel"></div></div>
       <div class="field"><label for="me">Email</label><input id="me" type="email" autocomplete="email" placeholder="you@byu.edu"></div><div class="err" id="merr">Add a valid email.</div>
       <button class="btn block" type="submit">Find me a contract</button></form></div>`; }
   return `<div class="formwrap wrap"><h1 class="title">Match me</h1><p class="sub">Tell us what you need. We'll rank every contract you actually qualify for.</p>
@@ -507,7 +518,8 @@ function vHow(){return `<div class="formwrap wrap"><h1 class="title">How it work
    <div><b>Selling</b><p class="sub">Post your contract in about 3 minutes. We review it, post it here, and share it to the BYU and UVU housing groups and KSL. Buyers answer 3 quick questions (school, dates, budget) before we connect them with you.</p></div>
    <div><b>Looking</b><p class="sub">Every listing shows the total monthly cost. Contact a seller and we'll connect you within ${WS.replyTime}, or use Match me and we'll keep looking for you.</p></div>
    <div><b>The transfer</b><p class="sub">The complex office approves and completes every contract transfer, same as always. We never take payment or hold money.</p></div>
-   <div><b>Who we are</b><p class="sub">White Stone is a student-run pilot at BYU for Winter 2027. Some listings are collected from public posts and link back to the original. We count anonymous taps to learn which features matter.</p></div>
+   <div><b>Who we are</b><p class="sub">White Stone is a student-run pilot at BYU for Winter 2027. Some listings are collected from public posts (with the poster's permission) and link back to the original.</p></div>
+   <div><b>Privacy & cookies</b><p class="sub">We count anonymous taps (with a random ID stored on your device, your device type and the site that sent you) to learn which features matter. If you accept cookies, we also use Google Analytics and Microsoft Clarity heatmaps and session replays; anything you type is hidden from replays. Your name and contact info are only shared with the specific buyer or seller you ask us to connect you with. <button class="link" data-consent-open>Change cookie settings</button></p></div>
    <a class="btn ghost" href="demo.html" data-t="how-demo">See the full app concept (sample data)</a></div></div>`}
 
 /* ---------------- modals ---------------- */
@@ -515,7 +527,7 @@ function openModal(html){$('#modal').innerHTML=`<button class="x" data-x aria-la
 function closeModal(){$('#scrim').classList.remove('open');document.body.style.overflow=''}
 function alertModal(from){track('alert-open',from);
   openModal(`<h3>Email me new contracts</h3><p class="sub">We'll email you when a contract that fits is posted. Unsubscribe any time.</p>
-  <form id="af" novalidate style="margin-top:14px"><div class="field"><label for="ae">Email</label><input id="ae" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
+  <form id="af" data-clarity-mask="true" novalidate style="margin-top:14px"><div class="field"><label for="ae">Email</label><input id="ae" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
   <div class="row2"><div class="field"><label for="am">Move-in month</label><select id="am"><option>Dec 2026</option><option selected>Jan 2027</option><option>Feb 2027</option><option>May 2027</option><option>Later</option></select></div>
   <div class="field"><label for="ab">Max per month</label><select id="ab"><option>$400</option><option selected>$500</option><option>$600</option><option>$700+</option></select></div></div>
   <div class="field"><label for="ag">Housing type</label><select id="ag"><option>Women's</option><option>Men's</option><option>Either</option></select></div>
@@ -523,8 +535,27 @@ function alertModal(from){track('alert-open',from);
   $('#af').dataset.from=from;}
 function soonModal(id){const s=SOON.find(x=>x.id===id);track('soon-'+id);
   openModal(`<h3>${s.title}</h3><div class="note">${s.price?'We don\'t offer this yet and won\'t charge anything. Leave your email and we\'ll tell you if we launch it.':'This isn\'t built yet. We\'re building what students ask for most first.'}</div><p class="sub">${s.body}</p>
-  <form id="sf" novalidate style="margin-top:12px"><div class="field"><label for="se">Email <span class="hint">(optional)</span></label><input id="se" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
+  <form id="sf" data-clarity-mask="true" novalidate style="margin-top:12px"><div class="field"><label for="se">Email <span class="hint">(optional)</span></label><input id="se" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
   <button class="btn block" type="submit">${s.price?'Tell me if it launches':'Notify me'}</button></form>`);$('#sf').dataset.id=id;}
+
+/* ---------------- analytics consent (Google Analytics + Microsoft Clarity) ---------------- */
+function loadThirdParty(){
+  if(window.__wsLoaded)return; window.__wsLoaded=true;
+  if(WS.ga4){ window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments)};
+    gtag('consent','default',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+    gtag('js',new Date()); gtag('config',WS.ga4,{ws_source:TEAM?'team':SRC,traffic_type:TEAM?'internal':undefined});
+    const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(WS.ga4);document.head.appendChild(s); }
+  if(WS.clarity){ (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script",WS.clarity);
+    clarity('consent'); clarity('set','ws_source',TEAM?'team':SRC); clarity('set','device',DEVICE); if(TEAM)clarity('set','team','1'); }
+}
+function consentBar(){
+  if(!WS.ga4&&!WS.clarity)return; let el=$('#consent'); if(!el){el=document.createElement('div');el.id='consent';el.className='consent';el.setAttribute('role','dialog');el.setAttribute('aria-label','Cookie settings');document.body.appendChild(el)}
+  el.innerHTML=`<div><b>Help us improve White Stone?</b> We'd like to use cookies for Google Analytics and Microsoft Clarity (heatmaps and session replays) to see how the site is used. Anything you type is hidden from replays. We never sell data or run ads.</div>
+   <div class="row"><button class="btn sm" data-consent="yes">Accept</button><button class="btn sm ghost" data-consent="no">Decline</button><a class="link" href="#/how" style="align-self:center">Details</a></div>`;
+  el.style.display='flex';
+}
+const CONSENT=store.get('ws_consent','');
+if(CONSENT==='yes')loadThirdParty(); else if(!CONSENT)setTimeout(consentBar,1200);
 
 /* ---------------- router ---------------- */
 async function route(){
@@ -545,6 +576,8 @@ window.addEventListener('hashchange',route);
 /* ---------------- events ---------------- */
 document.addEventListener('click',e=>{
   const t=e.target;
+  const cs=t.closest('[data-consent]'); if(cs){const v=cs.dataset.consent;store.set('ws_consent',v);track('consent-'+v);$('#consent').style.display='none';if(v==='yes')loadThirdParty();else if(window.__wsLoaded){toast('Saved. Reload the page to fully turn off analytics.')}return}
+  if(t.closest('[data-consent-open]')){store.set('ws_consent','');consentBar();return}
   const sv=t.closest('[data-save]'); if(sv){e.preventDefault();e.stopPropagation();const id=sv.dataset.save;let s=saved();const on=!s.includes(id);s=on?s.concat(id):s.filter(x=>x!==id);store.set('ws_saved',s);track(on?'save':'unsave',id);toast(on?'Saved':'Removed');rerender(true);return}
   const ch=t.closest('[data-chip]'); if(ch){const k=ch.dataset.chip;F.chips.has(k)?F.chips.delete(k):F.chips.add(k);ch.setAttribute('aria-pressed',F.chips.has(k));track('filter-'+k);renderResults();return}
   if(t.closest('[data-clear]')){F.chips.clear();F.q='';rerender(true);return}
