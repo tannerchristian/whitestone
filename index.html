@@ -327,7 +327,7 @@ function submitDoor(e){
   if(!SMOKE.form.action&&DEBUG){ console.log('Form not configured; would submit',em,current); }
   modal.innerHTML=`<button class="close" aria-label="Close" data-close>×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">You're on the list</h3>
    <p style="color:var(--mute);margin:6px 0 16px">We'll email you when <b>${current.title}</b> is ready. Want to see what we're building?</p>
-   <a class="btn" href="demo.html" data-track="try-demo-after-signup">Open the app preview</a>
+   <a class="btn" href="demo.html?src=${encodeURIComponent(SRC)}" data-track="try-demo-after-signup">Open the app preview</a>
    <div style="margin-top:10px"><button class="btn ghost" data-close>Keep browsing</button></div></div>`;
 }
 document.addEventListener('click',e=>{
