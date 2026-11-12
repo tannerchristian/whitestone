@@ -2,342 +2,597 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>White Stone · Short-term student housing contracts</title>
-<meta name="description" content="Buy or sell a 4–6 month BYU/UVU housing contract without the Facebook chaos. Verified students, total cost up front, AI screening and matching.">
-<meta property="og:title" content="Sell or find a short-term housing contract in Provo">
-<meta property="og:description" content="Verified students, total cost up front, and an assistant that screens and matches for you. Early access for Winter 2027.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>White Stone · Student housing contracts, Provo & Orem</title>
+<meta name="description" content="Sell your BYU/UVU housing contract or find a 4–6 month one. Real listings, total monthly cost up front, free for students.">
+<meta property="og:title" content="White Stone · Sell or find a housing contract in Provo">
+<meta property="og:description" content="Real listings with the total monthly cost up front. Post your contract free and we'll share it to the BYU/UVU groups and KSL for you.">
 <meta property="og:image" content="home.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-/* ============ CONFIG: fill these in before launch (see SETUP.md) ============ */
-window.SMOKE = {
-  brand: "White Stone",
-  // GoatCounter site code, e.g. "whitestone" for https://whitestone.goatcounter.com
-  goatcounter: "",
-  // Google Form "formResponse" URL and entry IDs (from a pre-filled link)
-  form: {
-    action: "https://docs.google.com/forms/d/e/1FAIpQLSfmsDOBIS9sDn1g127_UzMHDIFaQm6YSl2ouDsNxVybb0_oiA/formResponse", // was e.g. "https://docs.google.com/forms/d/e/1FAIpQL.../formResponse"
-    email: "entry.1752250432",             // e.g. "entry.123456789"
-    role: "entry.1405394149",
-    feature: "entry.1522735470",
-    month: "entry.355767246",
-    source: "entry.538164258",
-    notes: "entry.243677285",
-    event: "entry.711759269",             // every button tap is logged as a row with this field
-    visitor: "entry.2039572591"            // random anonymous id per browser, to count unique visitors
-  }
+/* ===================== CONFIG ===================== */
+window.WS = {
+  // Listings: the "Listings" tab of the submissions spreadsheet, published to the web as CSV
+  listingsCsv: "",
+  // Submissions form (sellers, buyer contact requests, match requests, alerts, waitlist)
+  sub: { action: "https://docs.google.com/forms/d/e/1FAIpQLSeQwUe1Ar9b5Qwsc1aYJOV0AVDz-PBsDgb6NAuVVi8y9N8BjA/formResponse",
+         kind:"entry.88262513", name:"entry.902324829", email:"entry.158744084", phone:"entry.143884295",
+         listing_id:"entry.1537325726", details:"entry.1580865132", source:"entry.91940802", visitor:"entry.1708295650" },
+  // Click tracking form (same one V1 used)
+  ev: { action: "https://docs.google.com/forms/d/e/1FAIpQLSfmsDOBIS9sDn1g127_UzMHDIFaQm6YSl2ouDsNxVybb0_oiA/formResponse",
+        event:"entry.711759269", feature:"entry.1522735470", source:"entry.538164258", visitor:"entry.2039572591" },
+  replyTime: "12 hours"
 };
 </script>
 <style>
 :root{
-  --ink:#1F2328; --mute:#57606A; --line:#E3E7EA; --soft:#F4F7F6; --bg:#FFFFFF;
-  --brand:#0B6E5F; --brand-d:#08564A; --brand-l:#E3F4F0; --deep:#0E3B35; --gold:#B7791F; --gold-l:#FDF3E1;
+  --ink:#1F2328; --mute:#57606A; --faint:#8A939C; --line:#E3E7EA; --soft:#F4F7F6; --bg:#FFFFFF; --page:#F7F9F8;
+  --brand:#0B6E5F; --brand-d:#08564A; --brand-l:#E3F4F0; --deep:#0E3B35;
+  --gold:#B7791F; --gold-l:#FDF3E1; --bad:#B42318; --bad-l:#FEE4E2;
+  --r:16px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5}
-a{color:inherit}
-button{font-family:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-header.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
-.logo{white-space:nowrap;display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.2px}
-.logo i{width:26px;height:26px;border-radius:8px;background:var(--brand);display:inline-block;position:relative}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--page);line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+button,input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink)}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.2px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.logo i{width:26px;height:26px;border-radius:8px;background:var(--brand);position:relative;flex:0 0 auto}
 .logo i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:#fff}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;font-size:15.5px;padding:13px 20px;cursor:pointer;text-decoration:none;min-height:46px;transition:background .15s,transform .1s}
+.topnav{display:flex;gap:4px;align-items:center}
+.topnav a{text-decoration:none;color:var(--mute);font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:10px}
+.topnav a:hover{background:var(--soft);color:var(--ink)}
+.topnav a.on{color:var(--ink);background:var(--soft)}
+.topnav a.cta{background:var(--brand);color:#fff}
+.topnav a.cta:hover{background:var(--brand-d)}
+nav.tabs{display:none}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;font-size:15.5px;padding:12px 18px;min-height:46px;cursor:pointer;text-decoration:none;transition:background .15s}
 .btn:hover{background:var(--brand-d)}
-.btn:active{transform:scale(.98)}
 .btn.ghost{background:#fff;color:var(--brand);border:1.5px solid var(--brand)}
 .btn.ghost:hover{background:var(--brand-l)}
-.btn.sm{min-height:38px;padding:8px 14px;font-size:14px}
-.btn.light{background:#fff;color:var(--deep)}
-.btn.light:hover{background:var(--brand-l)}
-.btn:focus-visible,.opt:focus-visible{outline:3px solid #7CC7B9;outline-offset:2px}
+.btn.dark{background:var(--ink)} .btn.dark:hover{background:#000}
+.btn.gold{background:var(--gold)} .btn.gold:hover{background:#9A6417}
+.btn.block{width:100%}
+.btn.sm{min-height:38px;padding:8px 13px;font-size:14px}
+.btn:disabled{opacity:.45;cursor:default}
+.link{border:none;background:none;color:var(--brand);font-weight:700;cursor:pointer;padding:4px 0;font-size:14.5px}
+:focus-visible{outline:3px solid #7CC7B9;outline-offset:2px}
 /* hero */
-.hero{padding:48px 0 40px;background:linear-gradient(180deg,#F1F8F6 0%,#fff 100%)}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--brand);background:var(--brand-l);padding:6px 11px;border-radius:999px;letter-spacing:.3px}
-h1{font-size:44px;line-height:1.08;letter-spacing:-1.2px;margin:14px 0 14px;text-wrap:balance}
-.lead{font-size:18px;color:var(--mute);margin:0 0 24px;max-width:34em}
-.split{display:flex;gap:12px;flex-wrap:wrap}
-.trustrow{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13.5px;color:var(--mute);font-weight:600}
-.trustrow span::before{content:"✓ ";color:var(--brand);font-weight:800}
-.phones{position:relative;height:520px}
-.phone{position:absolute;width:240px;border-radius:30px;overflow:hidden;box-shadow:0 0 0 7px #15181b,0 24px 50px rgba(0,0,0,.22);background:#fff}
-.phone img{display:block;width:100%}
-.phone.a{left:0;top:10px;transform:rotate(-4deg)}
-.phone.b{right:0;top:40px;transform:rotate(4deg)}
-/* sections */
-section{padding:56px 0}
-h2{font-size:30px;letter-spacing:-.6px;margin:0 0 8px;text-wrap:balance}
-.sec-sub{color:var(--mute);font-size:16.5px;margin:0 0 28px;max-width:40em}
-.tabs{display:inline-flex;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:22px;gap:4px}
-.tabs button{border:none;background:none;padding:9px 16px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--mute);cursor:pointer}
-.tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.feat{border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px;background:#fff}
-.feat .ic{width:42px;height:42px;border-radius:12px;background:var(--brand-l);display:flex;align-items:center;justify-content:center}
-.feat h3{margin:0;font-size:17.5px;letter-spacing:-.2px}
-.feat p{margin:0;color:var(--mute);font-size:14.5px;flex:1}
-.feat .who{font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--brand);text-transform:uppercase}
-.feat .btn{align-self:flex-start;margin-top:4px}
-.feat.gold{border-color:#EBCB8B;background:linear-gradient(180deg,#FFFBF2,#fff)}
-.feat.gold .ic{background:var(--gold-l)}
-.feat.gold .who{color:var(--gold)}
-.price{font-weight:800;font-size:22px;letter-spacing:-.3px}
-.price small{font-size:13px;font-weight:600;color:var(--mute)}
-.band{background:var(--deep);color:#fff;border-radius:24px;padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
-.band p{color:#C8E3DD;margin:6px 0 0}
-.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:s}
-.how div{background:var(--soft);border-radius:16px;padding:18px}
-.how b{display:block;margin-bottom:4px}
-.how div::before{counter-increment:s;content:counter(s);display:inline-flex;width:26px;height:26px;border-radius:13px;background:var(--brand);color:#fff;font-weight:800;font-size:13px;align-items:center;justify-content:center;margin-bottom:8px}
-.how span{color:var(--mute);font-size:14.5px}
-footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--mute);font-size:13.5px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-/* modal */
-.scrim{position:fixed;inset:0;background:rgba(14,20,22,.55);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
-.scrim.open{display:flex}
-.modal{background:#fff;border-radius:20px;max-width:440px;width:100%;padding:24px;max-height:92vh;overflow:auto;position:relative;animation:pop .2s ease}
-@keyframes pop{from{transform:translateY(10px);opacity:0}}
-.modal h3{margin:0 0 6px;font-size:21px;letter-spacing:-.3px;padding-right:28px}
-.modal .note{background:var(--gold-l);color:#7A4E0E;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:10px 0 16px}
-.close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:17px;border:none;background:var(--soft);cursor:pointer;font-size:18px;line-height:1}
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.field label{font-size:13.5px;font-weight:700}
-.field input,.field select,.field textarea{border:1.5px solid #D5DBDF;border-radius:11px;padding:11px 12px;font-size:16px;font-family:inherit;outline:none;background:#fff;color:var(--ink)}
+.hero{background:linear-gradient(180deg,#EAF5F2,#F7F9F8);border-bottom:1px solid var(--line)}
+.hero .wrap{padding-top:28px;padding-bottom:24px;display:flex;flex-direction:column;gap:14px}
+.hero h1{margin:0;font-size:34px;line-height:1.08;letter-spacing:-1px;max-width:18em;text-wrap:balance}
+.hero p{margin:0;color:var(--mute);font-size:16.5px;max-width:38em}
+.hero .row{display:flex;gap:10px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--brand);background:var(--brand-l);padding:5px 10px;border-radius:999px;align-self:flex-start}
+/* filters */
+.filters{position:sticky;top:58px;z-index:20;background:var(--page);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;gap:8px;align-items:center;padding-top:10px;padding-bottom:10px;overflow-x:auto;scrollbar-width:none}
+.filters .wrap::-webkit-scrollbar{display:none}
+.search{flex:0 0 220px;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:0 12px;height:38px}
+.search input{border:none;outline:none;flex:1;min-width:0;font-size:15px;background:transparent}
+.chip{flex:0 0 auto;border:1px solid #D5DBDF;background:#fff;border-radius:999px;padding:7px 12px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+select.sort{flex:0 0 auto;border:1px solid #D5DBDF;border-radius:999px;padding:7px 10px;font-size:13.5px;font-weight:600;background:#fff}
+/* grid */
+.section{padding-top:20px;padding-bottom:28px}
+.section h2{margin:0 0 4px;font-size:22px;letter-spacing:-.4px}
+.sub{color:var(--mute);font-size:14.5px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
+a.card:hover{box-shadow:0 8px 24px rgba(16,40,36,.10);transform:translateY(-2px)}
+.ph{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#DCEFEA,#C8E2DB);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .ini{font-size:40px;font-weight:800;color:#0B6E5F55;letter-spacing:-1px}
+.ph .tl{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}
+.ph .tr{position:absolute;top:10px;right:10px}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;background:#fff;color:var(--ink)}
+.tag.ok{background:var(--brand-l);color:var(--brand)} .tag.taken{background:var(--ink);color:#fff} .tag.dark{background:rgba(31,35,40,.78);color:#fff}
+.heart{width:36px;height:36px;border-radius:18px;border:none;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.cb .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cb b{font-size:16px}
+.price{font-weight:800;font-size:18px;white-space:nowrap} .price small{font-weight:500;font-size:12.5px;color:var(--mute)}
+.meta{color:var(--mute);font-size:13.5px}
+.mini{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.mini span{font-size:12px;font-weight:600;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+.card.isTaken{opacity:.6}
+/* empty / panels */
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.panel h3{margin:0 0 6px;font-size:18px}
+.empty{grid-column:1/-1;text-align:center;padding:36px 20px}
+.empty p{max-width:30em;margin:6px auto 16px;color:var(--mute)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.soon{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.soon button{text-align:left;background:#fff;border:1px dashed #C9D1D6;border-radius:14px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.soon button:hover{border-color:var(--brand);background:#FBFEFD}
+.soon b{font-size:14.5px} .soon span{font-size:13px;color:var(--mute)}
+.soon em{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.4px;color:var(--gold);text-transform:uppercase}
+/* detail */
+.detail{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;padding-top:18px;padding-bottom:40px}
+.gal{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,#DCEFEA,#C8E2DB);display:flex;align-items:center;justify-content:center}
+.gal img{width:100%;height:100%;object-fit:cover}
+.gal .nb{position:absolute;top:calc(50% - 18px);width:36px;height:36px;border-radius:18px;border:none;background:rgba(255,255,255,.92);cursor:pointer;font-size:18px;font-weight:700}
+.gal .count{position:absolute;right:12px;bottom:12px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--mute);text-decoration:none;font-weight:600;font-size:14px;margin-top:14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 12px;display:flex;flex-direction:column;gap:1px}
+.tile .k{font-size:11.5px;color:var(--mute);font-weight:600} .tile .v{font-size:17px;font-weight:800} .tile .s{font-size:12px;color:var(--mute)}
+.box{background:var(--soft);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:7px}
+.line{display:flex;justify-content:space-between;font-size:14.5px}
+.side{display:flex;flex-direction:column;gap:16px}
+.stick{position:sticky;top:76px;display:flex;flex-direction:column;gap:14px}
+h1.title{margin:6px 0 4px;font-size:26px;letter-spacing:-.5px;line-height:1.15}
+.amen{display:flex;flex-wrap:wrap;gap:8px} .amen span{font-size:13.5px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px}
+.seller{display:flex;gap:12px;align-items:center}
+.av{width:44px;height:44px;border-radius:22px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
+/* forms */
+.formwrap{max-width:640px;margin:0 auto;padding-top:22px;padding-bottom:48px}
+.steps{display:flex;gap:6px;margin:12px 0 18px}
+.steps i{flex:1;height:5px;border-radius:3px;background:var(--line)} .steps i.on{background:var(--brand)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;min-width:0}
+.field label,.lab{font-size:14px;font-weight:700}
+.hint{font-size:12.5px;color:var(--mute);font-weight:500}
+.field input,.field select,.field textarea{border:1.5px solid #D5DBDF;border-radius:11px;padding:11px 12px;background:#fff;outline:none;width:100%}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand)}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
-.opt{border:1.5px solid #D5DBDF;background:#fff;border-radius:10px;padding:9px 13px;font-size:14.5px;font-weight:600;cursor:pointer}
-.opt[aria-pressed=true]{border-color:var(--brand);background:var(--brand-l);color:var(--brand)}
-.err{color:#B42318;font-size:13px;margin-top:-6px;margin-bottom:10px;display:none}
-.done{text-align:center;padding:12px 0}
-.done .big{width:56px;height:56px;border-radius:28px;background:var(--brand-l);color:var(--brand);font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.fine{font-size:12px;color:var(--mute);margin-top:10px}
-/* debug */
-#debug{position:fixed;left:12px;bottom:12px;z-index:60;background:#111;color:#cfe;font:12px/1.4 ui-monospace,Menlo,monospace;padding:10px 12px;border-radius:10px;max-height:50vh;overflow:auto;display:none;min-width:220px}
-@media (max-width:860px){
-  .hero{padding-top:28px}
-  .hero .wrap{grid-template-columns:1fr}
-  h1{font-size:34px}
-  .phones{height:400px;max-width:380px;margin:0 auto;width:100%}
-  .phone{width:185px;border-radius:24px;box-shadow:0 0 0 5px #15181b,0 18px 36px rgba(0,0,0,.2)}
-  .grid,.how{grid-template-columns:1fr}
-  .navdemo{display:none!important}
-  .band{grid-template-columns:1fr;padding:26px}
-  section{padding:40px 0}
-  h2{font-size:25px}
+.req{color:var(--bad)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{border:1.5px solid #D5DBDF;background:#fff;border-radius:10px;padding:9px 13px;font-size:14.5px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed=true]{border-color:var(--brand);background:var(--brand-l);color:var(--brand)}
+.check{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:10px;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:1px;accent-color:var(--brand);flex:0 0 auto}
+.check b{display:block;font-size:14.5px} .check span{font-size:13px;color:var(--mute)}
+.err{color:var(--bad);font-size:13px;margin:-6px 0 10px;display:none}
+.navrow{display:flex;gap:10px;margin-top:8px}
+.navrow .btn{flex:1}
+.totalbar{display:flex;justify-content:space-between;align-items:center;background:var(--brand-l);color:var(--deep);border-radius:12px;padding:10px 14px;font-weight:700;margin:-2px 0 14px}
+input[type=range]{accent-color:var(--brand);width:100%}
+/* chat */
+.chat{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.chat .hd{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.bubbles{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:240px}
+.b{max-width:85%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:1.4}
+.b.bot{background:#F1F3F5;border-bottom-left-radius:4px;align-self:flex-start}
+.b.me{background:var(--brand);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.opts{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
+.opt{min-height:42px;padding:9px 15px;border-radius:21px;border:1.5px solid var(--brand);background:#fff;color:var(--brand);font-weight:600;cursor:pointer;font-size:15px}
+.opt:hover{background:var(--brand-l)}
+.okbox{border:1.5px solid var(--brand);background:#F3FAF8;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.okbox .t{font-size:11.5px;font-weight:800;letter-spacing:.4px;color:var(--brand)}
+.done{text-align:center;padding:28px 16px}
+.done .big{width:60px;height:60px;border-radius:30px;background:var(--brand-l);color:var(--brand);font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.mrow{display:flex;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;text-decoration:none;color:inherit}
+.mrow .im{width:84px;height:84px;border-radius:10px;overflow:hidden;flex:0 0 auto;background:linear-gradient(135deg,#DCEFEA,#C8E2DB);display:flex;align-items:center;justify-content:center;font-weight:800;color:#0B6E5F66}
+.mrow .im img{width:100%;height:100%;object-fit:cover}
+.score{font-size:12.5px;font-weight:800;color:var(--brand);background:var(--brand-l);border-radius:8px;padding:3px 8px;white-space:nowrap}
+.why{font-size:12.5px;color:var(--mute);display:flex;flex-direction:column}
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(14,20,22,.55);z-index:60;display:none;align-items:center;justify-content:center;padding:16px}
+.scrim.open{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:440px;width:100%;padding:22px;max-height:92vh;overflow:auto;position:relative;animation:pop .2s ease}
+@keyframes pop{from{transform:translateY(10px);opacity:0}}
+.modal h3{margin:0 0 6px;font-size:20px;padding-right:30px}
+.note{background:var(--gold-l);color:#7A4E0E;border-radius:12px;padding:10px 12px;font-size:13.5px;margin:8px 0 14px}
+.x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:17px;border:none;background:var(--soft);cursor:pointer;font-size:18px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:70;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+footer{border-top:1px solid var(--line);padding:22px 0 100px;color:var(--mute);font-size:13px;background:#fff}
+footer .wrap{display:flex;flex-direction:column;gap:6px}
+.loading{grid-column:1/-1;color:var(--mute);padding:30px 0;text-align:center}
+@media (max-width:900px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .soon{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail{grid-template-columns:1fr;gap:18px}
+  .stick{position:static}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (max-width:640px){
+  .topnav{display:none}
+  nav.tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
+  nav.tabs a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--mute);text-decoration:none;padding:4px 0}
+  nav.tabs a.on{color:var(--brand)}
+  .hero h1{font-size:28px}
+  .hero .row .btn{flex:1}
+  .grid{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .row2{grid-template-columns:1fr 1fr}
+  .search{flex-basis:180px}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
 <header class="top"><div class="wrap">
-  <div class="logo"><i></i><span data-brand>White Stone</span></div>
-  <div style="display:flex;gap:8px">
-    <a class="btn sm ghost navdemo" href="demo.html" data-track="try-demo-nav">Try the preview</a>
-    <button class="btn sm" data-feature="early-access-nav">Get early access</button>
-  </div>
+  <a class="logo" href="#/"><i></i>White Stone</a>
+  <nav class="topnav" id="topnav">
+    <a href="#/" data-r="home">Find a contract</a>
+    <a href="#/match" data-r="match">Match me</a>
+    <a href="#/saved" data-r="saved">Saved</a>
+    <a href="#/how" data-r="how">How it works</a>
+    <a href="#/post" data-r="post" class="cta">Post your contract</a>
+  </nav>
 </div></header>
 
-<main>
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">BYU · UVU · Winter 2027 contracts</span>
-    <h1>Sell your housing contract, or find a <span style="white-space:nowrap">4–6 month</span> one, without the Facebook chaos.</h1>
-    <p class="lead">Every listing shows the real monthly total, the dates and the complex rules. An assistant screens replies for sellers and matches buyers to contracts they actually qualify for.</p>
-    <div class="split">
-      <button class="btn" data-feature="hero-selling">I'm selling my contract</button>
-      <button class="btn ghost" data-feature="hero-looking">I need a place</button>
-    </div>
-    <div class="trustrow"><span>Verified students only</span><span>Total cost up front</span><span>Free to post and search</span></div>
-  </div>
-  <div class="phones" aria-hidden="true">
-    <div class="phone a"><img src="home.jpg" alt=""></div>
-    <div class="phone b"><img src="chat.jpg" alt=""></div>
-  </div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <h2>What would you use?</h2>
-  <p class="sec-sub">We're deciding what to build first. Tap the features you'd actually use; each button shows you where it stands.</p>
-  <div class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-tab="all">All</button>
-    <button role="tab" aria-selected="false" data-tab="seller">Selling</button>
-    <button role="tab" aria-selected="false" data-tab="buyer">Looking</button>
-  </div>
-  <div class="grid" id="grid"></div>
-</div></section>
-
-<section style="padding-top:8px"><div class="wrap">
-  <h2>Need it handled for you?</h2>
-  <p class="sec-sub">Optional paid help for when you're out of time.</p>
-  <div class="grid" id="paid"></div>
-</div></section>
-
-<section style="padding-top:8px"><div class="wrap">
-  <div class="band">
-    <div><h2 style="margin:0">Click through the app preview</h2><p>Browse sample listings, run the eligibility check, try AI Match and post a sample contract. Nothing you do there is real.</p></div>
-    <a class="btn light" href="demo.html" data-track="try-demo-band">Open the preview</a>
-  </div>
-</div></section>
-
-<section style="padding-top:8px"><div class="wrap">
-  <h2>How a transfer works</h2>
-  <p class="sec-sub">The complex still signs off on every transfer. We get the right people to the office faster.</p>
-  <div class="how">
-    <div><b>Post or search once</b><span>Sellers post in a few minutes and it goes out to the Facebook groups, KSL and Marketplace. Buyers see listings from all of them in one feed.</span></div>
-    <div><b>Only qualified matches</b><span>The assistant checks school, dates and budget, so sellers only hear from people who can take the contract.</span></div>
-    <div><b>Tour and transfer</b><span>Book a tour in the chat, then complete the transfer with the complex office as usual.</span></div>
-  </div>
-</div></section>
-</main>
+<main id="app"></main>
 
 <footer><div class="wrap">
-  <span><b data-brand>White Stone</b> is a student project at BYU, launching for Winter 2027 contracts.</span>
-  <span>We count which buttons people tap (anonymously) to decide what to build. Your email is only used to tell you when it's ready.</span>
+  <span><b>White Stone</b> is a student-run pilot at BYU for Winter 2027 contract transfers in Provo and Orem. It's free for students; we never take payment.</span>
+  <span>We help buyers and sellers find each other. The complex office completes every transfer. We count anonymous taps to learn which features matter. <a href="#/how">How it works</a> · <a href="demo.html">See the full app concept</a></span>
 </div></footer>
 
-<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="mtitle">
-  <div class="modal" id="modal"></div>
-</div>
-<div id="debug"></div>
+<nav class="tabs" id="tabs">
+  <a href="#/" data-r="home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Find</a>
+  <a href="#/match" data-r="match"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Match</a>
+  <a href="#/post" data-r="post"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Post</a>
+  <a href="#/saved" data-r="saved"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>Saved</a>
+</nav>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
 
 <script>
-/* ---------- features (each one is a tracked fake door) ---------- */
-const ICON = {
-  post:'<path d="M12 5v14M5 12h14"/>', share:'<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><path d="M12 2v13"/>',
-  bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/>',
-  spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>', search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
-  cards:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M3 6v12M21 6v12"/>', dollar:'<path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
-  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>', cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
-  bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>', star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',
-  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.3 0 4 1.5 4.5 4"/>',
-  hand:'<path d="M7 11V5a2 2 0 0 1 4 0v5M11 10V4a2 2 0 0 1 4 0v6M15 10V6a2 2 0 0 1 4 0v8a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.5L3 14a2 2 0 0 1 3.4-2L7 13"/>'
-};
-const FEATURES = [
- {id:'post-contract', who:'seller', icon:'post', title:'Post your contract in 3 minutes', body:'A guided form with total monthly cost, dates, complex rules and parking, so buyers stop asking the same 10 questions.', cta:'Post my contract'},
- {id:'cross-post', who:'seller', icon:'share', title:'Post everywhere at once', body:'One listing goes out to the BYU and UVU housing groups, KSL and Facebook Marketplace. Every reply comes back to one inbox.', cta:'Cross-post my listing'},
- {id:'ai-screening', who:'seller', icon:'bot', title:'AI screens your replies', body:'The assistant asks every buyer about school, dates and budget. You only hear from people who can actually take the contract.', cta:'Turn on screening'},
- {id:'ai-match', who:'buyer', icon:'spark', title:'AI Match', body:'Tell it your budget, move-in date, length and school. It ranks every contract you qualify for and explains why.', cta:'Get matched'},
- {id:'search-all-sites', who:'buyer', icon:'search', title:'Search every site at once', body:'Contracts from Facebook groups, KSL and Marketplace pulled into one feed with the same filters, so you don\'t miss a good one.', cta:'Search all sites'},
- {id:'short-term', who:'buyer', icon:'cal', title:'4–6 month contracts only', body:'Filter for semester-length stays, internships and spring/summer, instead of scrolling past 12-month leases.', cta:'Find a 4–6 month contract'},
- {id:'swipe', who:'buyer', icon:'cards', title:'Swipe through rooms', body:'Big photos first. Swipe to pass or save, then compare your saved rooms side by side.', cta:'Start swiping'},
- {id:'true-cost', who:'buyer', icon:'dollar', title:'Real monthly total', body:'Rent, utilities, internet and transfer fees on every listing, so the price you see is the price you pay.', cta:'See true costs'},
- {id:'verified', who:'both', icon:'shield', title:'Verified students only', body:'Buyers and sellers confirm a BYU or UVU email, so you\'re dealing with a real student, not a scammer.', cta:'Verify my school email'},
- {id:'seller-ratings', who:'both', icon:'star', title:'Seller ratings & reviews', body:'See how past transfers went before you message someone.', cta:'See ratings'},
- {id:'alerts', who:'buyer', icon:'bell', title:'Instant alerts', body:'Get a text the minute a contract with your dates and budget is posted anywhere.', cta:'Set an alert'},
- {id:'semester-partner', who:'both', icon:'users', title:'Find a semester partner', body:'Leaving for the winter while someone else arrives? Get paired with a student who needs the opposite months.', cta:'Find my partner'}
-];
-const PAID = [
- {id:'concierge-buyer-29', who:'buyer', icon:'hand', title:'Find it for me', price:'$29', unit:'one time, only if we find you a place', body:'Tell us what you need. A person finds matching contracts, checks the details and sets up tours for you.', cta:'Find me a place · $29'},
- {id:'concierge-seller-49', who:'seller', icon:'hand', title:'Fill my contract for me', price:'$49', unit:'only when your contract is transferred', body:'We write the listing, post it everywhere, screen every reply and line up tours until someone takes it.', cta:'Fill my contract · $49'},
- {id:'featured-listing-10', who:'seller', icon:'star', title:'Featured listing', price:'$10', unit:'for 2 weeks', body:'Your contract shows at the top of searches and match results for people with your dates.', cta:'Feature my listing · $10'}
-];
-
-/* ---------- analytics ---------- */
+/* ---------------- utilities ---------------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const params=new URLSearchParams(location.search);
-const SRC=(params.get('src')||params.get('utm_source')||'direct').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30)||'direct';
+const SRC=(params.get('src')||params.get('utm_source')||store.get('ws_src','direct')).toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30)||'direct';
+store.set('ws_src',SRC);
+let VID=store.get('ws_vid',''); if(!VID){VID=Math.random().toString(36).slice(2,10);store.set('ws_vid',VID)}
 const DEBUG=params.has('debug');
-function local(name){try{const k='smoke_counts';const c=JSON.parse(localStorage.getItem(k)||'{}');c[name]=(c[name]||0)+1;localStorage.setItem(k,JSON.stringify(c));if(DEBUG)showDebug(c)}catch(e){}}
-function showDebug(c){const d=document.getElementById('debug');d.style.display='block';d.innerHTML='<b>local counts (debug)</b><br>source: '+SRC+'<br>'+Object.entries(c).map(([k,v])=>k+': '+v).join('<br>')}
-let VID='';try{VID=localStorage.getItem('smoke_vid')||'';if(!VID){VID=Math.random().toString(36).slice(2,10);localStorage.setItem('smoke_vid',VID)}}catch(e){VID=Math.random().toString(36).slice(2,10)}
-function postForm(fields){const F=SMOKE.form;if(!F.action)return;const fd=new FormData();
-  Object.entries(fields).forEach(([k,v])=>{if(F[k])fd.append(F[k],v)});
-  try{fetch(F.action,{method:'POST',mode:'no-cors',body:fd,keepalive:true}).catch(()=>{})}catch(e){}}
-function track(name,title,extra){
-  local(name);
-  postForm(Object.assign({event:name,source:SRC,visitor:VID},extra||{}));
-  const send=()=>{ try{ window.goatcounter.count({path:name,title:title||name,event:true}); window.goatcounter.count({path:name+'@'+SRC,title:(title||name)+' via '+SRC,event:true}); }catch(e){} };
-  if(window.goatcounter&&window.goatcounter.count) send(); else queue.push(send);
-}
-const queue=[];
-if(SMOKE.goatcounter){
-  const s=document.createElement('script'); s.async=true; s.src='https://gc.zgo.at/count.js';
-  s.dataset.goatcounter='https://'+SMOKE.goatcounter+'.goatcounter.com/count';
-  s.onload=()=>{const t=setInterval(()=>{if(window.goatcounter&&window.goatcounter.count){clearInterval(t);queue.splice(0).forEach(f=>f())}},100);setTimeout(()=>clearInterval(t),5000)};
-  document.head.appendChild(s);
-}
-track('visit@'+SRC,'Visit via '+SRC);
-if(DEBUG){try{showDebug(JSON.parse(localStorage.getItem('smoke_counts')||'{}'))}catch(e){}}
+function post(cfg,fields){ if(!cfg.action)return; const fd=new FormData(); Object.entries(fields).forEach(([k,v])=>{if(cfg[k]&&v!=null)fd.append(cfg[k],String(v))}); try{fetch(cfg.action,{method:'POST',mode:'no-cors',body:fd,keepalive:true}).catch(()=>{})}catch(e){} if(DEBUG)console.log('[post]',fields); }
+function track(event,feature){ post(WS.ev,{event,feature:feature||'',source:SRC,visitor:VID}); }
+function submit(kind,o){ post(WS.sub,Object.assign({kind,source:SRC,visitor:VID},o)); track('submit-'+kind,o.listing_id||''); }
+let toastT; function toast(m){let t=$('#toast'); if(!t){t=document.createElement('div');t.id='toast';t.className='toast';t.setAttribute('role','status');document.body.appendChild(t)} t.textContent=m; t.style.display='block'; clearTimeout(toastT); toastT=setTimeout(()=>t.style.display='none',2600)}
+function toISO(s){s=String(s||'').trim();if(!s)return '';if(/^\d{4}-\d{1,2}-\d{1,2}/.test(s)){const[y,m,d]=s.split(/[-T ]/);return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`}const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);if(m){const y=m[3].length===2?'20'+m[3]:m[3];return `${y}-${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}`}const d=new Date(s);return isNaN(d)?'':d.toISOString().slice(0,10)}
+const fmtD=s=>{const d=new Date(toISO(s)+'T12:00');return isNaN(d)?String(s||''):d.toLocaleDateString('en-US',{month:'short',day:'numeric'})};
+const months=(a,b)=>{const A=new Date(toISO(a)+'T12:00'),B=new Date(toISO(b)+'T12:00');if(isNaN(A)||isNaN(B))return 0;return Math.max(.5,Math.round((B-A)/(864e5*30.44)*2)/2)};
+const num=v=>{const n=parseFloat(String(v||'').replace(/[^0-9.]/g,''));return isNaN(n)?0:n};
+const emailOk=v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+const school=e=>/@(.*\.)?byu\.edu$/i.test(e)?'BYU':/@(.*\.)?uvu\.edu$/i.test(e)?'UVU':'other';
 
-/* ---------- render cards ---------- */
-const svg=n=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
-const whoLabel={seller:'For sellers',buyer:'For people looking',both:'For everyone'};
-function card(f,paid){return `<article class="feat ${paid?'gold':''}" data-who="${f.who}">
-  <div class="ic" style="color:${paid?'#B7791F':'#0B6E5F'}">${svg(f.icon)}</div>
-  <span class="who">${whoLabel[f.who]}</span><h3>${f.title}</h3>
-  ${paid?`<div class="price">${f.price} <small>${f.unit}</small></div>`:''}
-  <p>${f.body}</p><button class="btn ${paid?'':'ghost'}" data-feature="${f.id}">${f.cta}</button></article>`}
-document.getElementById('grid').innerHTML=FEATURES.map(f=>card(f)).join('');
-document.getElementById('paid').innerHTML=PAID.map(f=>card(f,true)).join('');
-document.querySelectorAll('[data-brand]').forEach(e=>e.textContent=SMOKE.brand);
-document.title=SMOKE.brand+' · Short-term student housing contracts';
-
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x===b));
-  const t=b.dataset.tab; track('tab-'+t,'Filter tab: '+t);
-  document.querySelectorAll('#grid .feat').forEach(c=>{c.style.display=(t==='all'||c.dataset.who===t||c.dataset.who==='both')?'':'none'});
-}));
-
-/* ---------- fake-door modal ---------- */
-const ALL=[...FEATURES,...PAID];
-const SPECIAL={
- 'hero-selling':{title:'Sell your contract',cta:'selling',role:'Selling my contract'},
- 'hero-looking':{title:'Find a short-term place',cta:'looking',role:'Looking for a place'},
- 'early-access-nav':{title:'Get early access'}
-};
-const scrim=document.getElementById('scrim'), modal=document.getElementById('modal');
-let current=null, lastFocus=null;
-function openDoor(id){
-  const f=ALL.find(x=>x.id===id), sp=SPECIAL[id]||{};
-  const title=f?f.title:(sp.title||'Get early access');
-  const paid=PAID.some(x=>x.id===id);
-  current={id,title,role:sp.role||(f&&f.who==='seller'?'Selling my contract':f&&f.who==='buyer'?'Looking for a place':'')};
-  track('click-'+id,'Clicked: '+title);
-  lastFocus=document.activeElement;
-  modal.innerHTML=`<button class="close" aria-label="Close" data-close>×</button>
-   <h3 id="mtitle">${title}</h3>
-   <div class="note">${paid?`We aren't taking payments yet. This is coming for Winter 2027, and you won't be charged anything by signing up.`:`This isn't live yet. We're opening early access for Winter 2027 contracts and building the features people ask for most first.`}</div>
-   <form id="door" novalidate>
-     <div class="field"><label for="em">School email</label><input id="em" type="email" autocomplete="email" placeholder="you@byu.edu or you@uvu.edu" required></div>
-     <div class="err" id="emerr">Enter an email address so we can let you know.</div>
-     <div class="field"><label>I'm…</label><div class="opts" id="role">${['Selling my contract','Looking for a place','Both'].map(r=>`<button type="button" class="opt" aria-pressed="${r===current.role}">${r}</button>`).join('')}</div></div>
-     <div class="field"><label for="mo">When? (move-in or when you leave)</label><select id="mo"><option value="">Pick a month</option>${['Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Later'].map(m=>`<option>${m}</option>`).join('')}</select></div>
-     <div class="field"><label for="nt">Anything you'd want it to do? (optional)</label><textarea id="nt" rows="2" placeholder="e.g. I need parking and a women's BYU-approved place"></textarea></div>
-     <button class="btn" style="width:100%" type="submit">${paid?'Notify me when it launches':'Get early access'}</button>
-     <div class="fine">We'll only email you about this launch. No spam, no selling your info.</div>
-   </form>`;
-  scrim.classList.add('open'); document.body.style.overflow='hidden';
-  setTimeout(()=>document.getElementById('em').focus(),50);
-  modal.querySelectorAll('#role .opt').forEach(b=>b.addEventListener('click',()=>{modal.querySelectorAll('#role .opt').forEach(x=>x.setAttribute('aria-pressed',x===b));current.role=b.textContent}));
-  document.getElementById('door').addEventListener('submit',submitDoor);
+/* ---------------- listings data ---------------- */
+let LISTINGS=null, LOAD_ERR=false;
+function parseCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){r.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;r.push(f);rows.push(r);r=[];f=''}else f+=c}if(f!==''||r.length){r.push(f);rows.push(r)}return rows}
+function normalize(o){
+  const L={...o}; L.start=toISO(o.start); L.end=toISO(o.end); L.id=String(o.id||'').trim(); L.status=(o.status||'').trim().toLowerCase();
+  L.rent=num(o.rent); L.utilities=num(o.utilities); L.other=num(o.other_monthly); L.total=L.rent+L.utilities+L.other;
+  L.fee=String(o.transfer_fee||'').trim(); L.months=months(L.start,L.end); L.dates=fmtD(L.start)+' – '+fmtD(L.end);
+  L.photos=String(o.photos||'').split(/[\s;,]+/).filter(u=>/^https?:\/\//.test(u));
+  L.amen=String(o.amenities||'').split(/[;,]/).map(s=>s.trim()).filter(Boolean);
+  L.near=(o.near||'BYU').trim(); L.rule=/byu/i.test(o.school_rule||'')?'BYU':'Open'; L.gender=(o.gender||'Co-ed').trim();
+  L.dist=num(o.distance_mi); L.external=!!(o.source_url&&!/white\s*stone|posted here/i.test(o.source||''));
+  return L;
 }
-function closeDoor(){ if(!scrim.classList.contains('open'))return; scrim.classList.remove('open'); document.body.style.overflow=''; if(current&&!current.done) track('close-'+current.id,'Closed without signing up: '+current.title); current=null; if(lastFocus)lastFocus.focus(); }
-function submitDoor(e){
-  e.preventDefault();
-  const em=document.getElementById('em').value.trim();
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('emerr').style.display='block';return}
-  current.done=true;
-  const school=/@(.*\.)?byu\.edu$/i.test(em)?'byu':/@(.*\.)?uvu\.edu$/i.test(em)?'uvu':'other';
-  track('signup-'+current.id,'Signed up: '+current.title,{email:em,role:current.role||'',feature:current.id,month:document.getElementById('mo').value,notes:document.getElementById('nt').value+' [school:'+school+']'});
-  if(!SMOKE.form.action&&DEBUG){ console.log('Form not configured; would submit',em,current); }
-  modal.innerHTML=`<button class="close" aria-label="Close" data-close>×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">You're on the list</h3>
-   <p style="color:var(--mute);margin:6px 0 16px">We'll email you when <b>${current.title}</b> is ready. Want to see what we're building?</p>
-   <a class="btn" href="demo.html?src=${encodeURIComponent(SRC)}" data-track="try-demo-after-signup">Open the app preview</a>
-   <div style="margin-top:10px"><button class="btn ghost" data-close>Keep browsing</button></div></div>`;
+async function loadListings(){
+  if(LISTINGS) return LISTINGS;
+  if(!WS.listingsCsv){ LISTINGS=[]; return LISTINGS; }
+  try{
+    const t=await fetch(WS.listingsCsv+(WS.listingsCsv.includes('?')?'&':'?')+'t='+Math.floor(Date.now()/60000)).then(r=>{if(!r.ok)throw 0;return r.text()});
+    const rows=parseCSV(t).filter(r=>r.some(c=>c.trim())); const h=rows.shift().map(s=>s.trim());
+    LISTINGS=rows.map(r=>normalize(Object.fromEntries(h.map((k,i)=>[k,r[i]||''])))).filter(l=>l.id&&(l.status==='live'||l.status==='taken'));
+  }catch(e){ LOAD_ERR=true; LISTINGS=[]; }
+  return LISTINGS;
 }
+const byId=id=>(LISTINGS||[]).find(l=>l.id===id);
+
+/* ---------------- shared bits ---------------- */
+const HEART=f=>`<svg width="18" height="18" viewBox="0 0 24 24" fill="${f?'#D92D20':'none'}" stroke="${f?'#D92D20':'#1F2328'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
+const ini=l=>esc((l.complex||'?').split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase());
+const saved=()=>store.get('ws_saved',[]);
+function photoBox(l){return l.photos[0]?`<img src="${esc(l.photos[0])}" alt="${esc(l.complex)} photo" loading="lazy">`:`<span class="ini">${ini(l)}</span>`}
+function card(l){
+  const sv=saved().includes(l.id), taken=l.status==='taken';
+  return `<a class="card ${taken?'isTaken':''}" href="#/l/${encodeURIComponent(l.id)}" data-t="open-listing" data-f="${esc(l.id)}">
+   <div class="ph">${photoBox(l)}
+     <div class="tl">${taken?'<span class="tag taken">Taken</span>':'<span class="tag ok">● Available</span>'}${l.external?'<span class="tag dark">Found on '+esc(l.source||'Facebook')+'</span>':''}</div>
+     <div class="tr"><button class="heart" data-save="${esc(l.id)}" aria-label="Save">${HEART(sv)}</button></div></div>
+   <div class="cb"><div class="t"><b>${esc(l.complex)}</b><span class="price">$${l.total}<small> /mo total</small></span></div>
+     <div class="meta">${esc(l.title||l.room+' room')}${l.dist?` · ${l.dist} mi to ${esc(l.near)}`:''}</div>
+     <div class="meta">${l.dates} · ${l.months} mo</div>
+     <div class="mini">${l.months<=6?'<span>Short-term</span>':''}<span>${l.rule==='BYU'?'BYU-contracted':'Open to all'}</span><span>${esc(l.gender)}</span>${/none/i.test(l.parking)?'':'<span>Parking</span>'}</div></div></a>`;
+}
+function soonGrid(){return `<div class="soon">${SOON.map(s=>`<button data-soon="${s.id}"><em>${s.price?'Paid option':'Coming soon'}</em><b>${s.title}</b><span>${s.body}</span></button>`).join('')}</div>`}
+const SOON=[
+ {id:'search-all-sites',title:'Search every site at once',body:'Facebook groups, KSL and Marketplace in one feed.'},
+ {id:'verified',title:'Verified students only',body:'Everyone confirms a BYU or UVU email.'},
+ {id:'swipe',title:'Swipe through rooms',body:'Big photos first. Swipe to pass or save.'},
+ {id:'ratings',title:'Seller ratings',body:'See how past transfers went.'},
+ {id:'ai-screening',title:'Automatic reply screening',body:'Every reply screened for school, dates and budget.'},
+ {id:'semester-partner',title:'Find a semester partner',body:'Pair with someone who needs the opposite months.'},
+ {id:'fill-my-contract-49',title:'Fill my contract for me · $49',body:'We handle everything; you pay only when it transfers.',price:1},
+ {id:'featured-listing-10',title:'Featured listing · $10',body:'Top of search for people with your dates.',price:1}
+];
+
+/* ---------------- views ---------------- */
+const F={q:'',chips:new Set(),sort:'new'};
+const CHIPS=[['u500','Under $500'],['short','4–6 months'],['jan','Starts in Jan'],['byu','Near BYU'],['uvu','Near UVU'],['women',"Women's"],['men',"Men's"],['parking','Parking']];
+function filtered(){
+  let L=(LISTINGS||[]).slice(); const q=F.q.trim().toLowerCase(), c=F.chips;
+  L=L.filter(l=>{
+    if(q&&!(l.complex+' '+l.title+' '+l.near+' '+l.dates).toLowerCase().includes(q))return false;
+    if(c.has('u500')&&l.total>500)return false; if(c.has('short')&&!(l.months>=3.5&&l.months<=6.5))return false;
+    if(c.has('jan')&&!/^\d{4}-01/.test(l.start||''))return false; if(c.has('byu')&&l.near!=='BYU')return false; if(c.has('uvu')&&l.near!=='UVU')return false;
+    if(c.has('women')&&/^men/i.test(l.gender))return false; if(c.has('men')&&/women/i.test(l.gender))return false; if(c.has('parking')&&/none/i.test(l.parking))return false;
+    return true});
+  const s={new:(a,b)=>String(b.posted||'').localeCompare(String(a.posted||'')),price:(a,b)=>a.total-b.total,soon:(a,b)=>String(a.start).localeCompare(String(b.start))}[F.sort];
+  L.sort((a,b)=>(a.status==='taken')-(b.status==='taken')||s(a,b)); return L;
+}
+function vHome(){
+  return `<section class="hero"><div class="wrap">
+    <span class="pill">BYU · UVU · Winter 2027 contracts</span>
+    <h1>Sell your housing contract, or find a 4–6 month one.</h1>
+    <p>Every listing shows the real monthly total. Post yours free and we'll share it to the BYU and UVU housing groups and KSL for you.</p>
+    <div class="row"><a class="btn" href="#/post" data-t="hero-post">Post my contract</a><a class="btn ghost" href="#/match" data-t="hero-match">Match me with one</a></div>
+  </div></section>
+  <div class="filters"><div class="wrap">
+    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#57606A" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="sr">Search</span><input id="q" placeholder="Complex or dates" value="${esc(F.q)}"></label>
+    ${CHIPS.map(c=>`<button class="chip" data-chip="${c[0]}" aria-pressed="${F.chips.has(c[0])}">${c[1]}</button>`).join('')}
+    <select class="sort" id="sort" aria-label="Sort"><option value="new"${F.sort==='new'?' selected':''}>Newest</option><option value="price"${F.sort==='price'?' selected':''}>Lowest price</option><option value="soon"${F.sort==='soon'?' selected':''}>Soonest start</option></select>
+  </div></div>
+  <section class="wrap section"><div id="results"><div class="grid"><div class="loading">Loading contracts…</div></div></div>
+    <div class="two">
+      <div class="panel"><h3>Can't find the right one?</h3><p class="sub">Tell us your dates and budget. We check the Facebook groups and KSL daily and send you matches.</p><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="#/match" data-t="panel-match">Match me</a><button class="btn ghost" data-alert="home">Email me new contracts</button></div></div>
+      <div class="panel"><h3>Leaving for an internship, mission or study abroad?</h3><p class="sub">Post your contract in about 3 minutes. We share it everywhere and only send you buyers who can actually take it.</p><div style="margin-top:12px"><a class="btn dark" href="#/post" data-t="panel-post">Post my contract free</a></div></div>
+    </div>
+    <div style="margin-top:28px"><h2>What should we build next?</h2><p class="sub">Tap anything you'd use. It helps us decide.</p>${soonGrid()}</div>
+  </section>`;
+}
+function renderResults(){
+  const el=$('#results'); if(!el)return;
+  if(!LISTINGS){el.innerHTML='<div class="grid"><div class="loading">Loading contracts…</div></div>';return}
+  const L=filtered(), all=LISTINGS.length;
+  if(!all){el.innerHTML=`<div class="panel empty"><h3>New contracts are being added this week</h3><p>We're collecting Winter 2027 contracts from students right now. Get an email the moment one matches your dates, or post yours to be one of the first.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" data-alert="empty">Email me new contracts</button><a class="btn ghost" href="#/post" data-t="empty-post">Post my contract</a></div></div>`;return}
+  el.innerHTML=`<div class="meta" style="font-weight:600">${L.length} of ${all} contract${all===1?'':'s'}</div><div class="grid">${L.length?L.map(card).join(''):`<div class="panel empty"><h3>Nothing matches those filters</h3><p>Clear a filter, or let us look for you.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn ghost" data-clear>Clear filters</button><a class="btn" href="#/match">Match me</a></div></div>`}</div>`;
+}
+function vDetail(id){
+  const l=byId(id);
+  if(!l) return `<div class="wrap section"><a class="back" href="#/">← All contracts</a><div class="panel empty" style="margin-top:14px"><h3>This contract isn't listed anymore</h3><p>It may have been taken. Want us to find a similar one?</p><a class="btn" href="#/match">Match me</a></div></div>`;
+  const sv=saved().includes(l.id), taken=l.status==='taken';
+  return `<div class="wrap"><a class="back" href="#/">← All contracts</a>
+  <div class="detail">
+    <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <div class="gal" id="gal" data-i="0">${l.photos.length?`<img src="${esc(l.photos[0])}" alt="${esc(l.complex)} photo 1">`:`<span class="ini" style="font-size:64px;font-weight:800;color:#0B6E5F55">${ini(l)}</span>`}
+        ${l.photos.length>1?`<button class="nb" style="left:12px" data-ph="-1" aria-label="Previous photo">‹</button><button class="nb" style="right:12px" data-ph="1" aria-label="Next photo">›</button><span class="tag dark count" id="phc">1 / ${l.photos.length}</span>`:''}
+        ${l.photos.length?'':'<span class="tag dark count">Photos coming soon</span>'}</div>
+      <div><span class="tag ${taken?'taken':'ok'}">${taken?'Taken':'● Available'}</span>
+        <h1 class="title">${esc(l.title||l.room+' room')}</h1>
+        <div class="meta">${esc(l.complex)}${l.dist?` · ${l.dist} mi from ${esc(l.near)}`:''} · ${l.rule==='BYU'?'BYU-contracted':'Open to all'} · ${esc(l.gender)}</div></div>
+      <div><h2 style="font-size:18px;margin:0 0 10px">Contract at a glance</h2><div class="tiles">
+        <div class="tile"><span class="k">Total monthly cost</span><span class="v">$${l.total}/mo</span><span class="s">rent + utilities + fees</span></div>
+        <div class="tile"><span class="k">Contract dates</span><span class="v">${l.dates}</span><span class="s">${l.months} months</span></div>
+        <div class="tile"><span class="k">Complex rules</span><span class="v">${l.rule==='BYU'?'BYU Eligible':'Open'}</span><span class="s">${l.rule==='BYU'?'BYU students only · ':''}${esc(l.gender)}</span></div>
+        <div class="tile"><span class="k">Parking</span><span class="v">${/none/i.test(l.parking)?'None':esc(l.parking||'Ask seller')}</span><span class="s">&nbsp;</span></div></div></div>
+      <div class="box"><b>What $${l.total} covers</b>
+        <div class="line"><span>Rent</span><span>$${l.rent}</span></div>
+        ${l.utilities?`<div class="line"><span>Utilities (avg.)</span><span>$${l.utilities}</span></div>`:''}
+        ${l.other?`<div class="line"><span>Internet / other monthly</span><span>$${l.other}</span></div>`:''}
+        <div style="height:1px;background:#D8DDE2"></div><div class="line" style="font-weight:800"><span>Total</span><span>$${l.total}/mo</span></div>
+        ${l.fee?`<span class="meta" style="font-size:12.5px">Transfer fee: ${esc(l.fee)}</span>`:''}</div>
+      ${l.amen.length?`<div><h2 style="font-size:18px;margin:0 0 10px">Amenities</h2><div class="amen">${l.amen.map(a=>`<span>${esc(a)}</span>`).join('')}</div></div>`:''}
+    </div>
+    <div class="side"><div class="stick">
+      <div class="panel" style="display:flex;flex-direction:column;gap:12px">
+        <div class="price" style="font-size:24px">$${l.total} <small>/mo total</small></div>
+        <div class="meta">${l.dates} · ${l.months} months</div>
+        ${taken?`<button class="btn block dark" data-alert="taken-${esc(l.id)}">Email me similar contracts</button>`:`<a class="btn block" href="#/contact/${encodeURIComponent(l.id)}" data-t="contact-start" data-f="${esc(l.id)}">Contact ${esc(l.seller_first_name||'the seller')}</a>`}
+        <div style="display:flex;gap:8px"><button class="btn ghost sm" style="flex:1" data-save="${esc(l.id)}">${sv?'Saved':'Save'}</button><button class="btn ghost sm" style="flex:1" data-share="${esc(l.id)}">Share</button></div>
+        <span class="meta" style="font-size:12.5px">We'll ask 3 quick questions so ${esc(l.seller_first_name||'the seller')} only hears from people who can take the contract.</span>
+      </div>
+      <div class="panel seller"><div class="av">${esc((l.seller_first_name||'?')[0])}</div><div><b>${l.external?'Posted by a student on '+esc(l.source||'Facebook'):'Listed by '+esc(l.seller_first_name||'a student')}</b>
+        ${l.why_leaving?`<div class="meta">Why they're leaving: ${esc(l.why_leaving)}</div>`:''}
+        ${l.external&&l.source_url?`<a href="${esc(l.source_url)}" target="_blank" rel="noopener" data-t="view-original" data-f="${esc(l.id)}" style="font-size:13.5px;font-weight:600">View the original post ↗</a>`:''}</div></div>
+    </div></div>
+  </div></div>`;
+}
+/* --- contact / screening --- */
+let CH=null;
+function chatQs(l){return [
+ {k:'school',ask:`Hi! A few quick questions before I pass you to ${l.seller_first_name||'the seller'}. Are you a current BYU or UVU student?`,opts:[
+   {l:'Yes, BYU',ok:true},{l:'Yes, UVU',ok:l.rule!=='BYU',why:`${l.complex} is BYU-contracted, so the office can only transfer it to a BYU student.`},{l:'Not a student',ok:l.rule!=='BYU',why:`${l.complex} only accepts BYU students.`}]},
+ {k:'dates',ask:`This contract runs ${l.dates} (${l.months} months). Does that work for when you need to move in?`,opts:[{l:'Yes, that works',ok:true},{l:'I need different dates',ok:false,why:'The complex sets the dates, so this one won\'t fit.'}]},
+ {k:'budget',ask:`The total is $${l.total}/mo including utilities. Is that within your budget?`,opts:[{l:'Yes',ok:true},{l:'A little high',ok:true},{l:'No',ok:false,why:'Thanks for being upfront.'}]}
+]}
+function vContact(id){
+  const l=byId(id); if(!l) return vDetail(id);
+  if(!CH||CH.id!==id) CH={id,a:[],sent:false};
+  const Q=chatQs(l); let html='',failed=null,passed=false;
+  for(let i=0;i<Q.length;i++){ html+=`<div class="b bot">${esc(Q[i].ask)}</div>`; if(CH.a.length<=i)break; const o=Q[i].opts[CH.a[i]]; html+=`<div class="b me">${esc(o.l)}</div>`; if(!o.ok){failed=o;break} if(i===Q.length-1)passed=true; }
+  let foot='';
+  if(failed){ html+=`<div class="b bot">${esc(failed.why)} I can email you when a contract that fits is posted, or match you with others now.</div>`;
+    foot=`<div class="opts"><a class="btn" href="#/match" data-t="screen-fail-match">See better matches</a><button class="btn ghost" data-alert="screen-fail">Email me new contracts</button><button class="link" data-restart>Start over</button></div>`; }
+  else if(passed && !CH.sent){ html+=`<div class="b bot">You're a great fit. Where should ${esc(l.seller_first_name||'the seller')} reach you?</div>`;
+    foot=`<form id="cf" class="opts" style="flex-direction:column;align-items:stretch" novalidate>
+      <div class="row2"><div class="field" style="margin:0"><label for="cn">First name</label><input id="cn" autocomplete="given-name" required></div><div class="field" style="margin:0"><label for="cp">Phone <span class="hint">(fastest)</span></label><input id="cp" type="tel" autocomplete="tel" placeholder="801-555-0123"></div></div>
+      <div class="field" style="margin:0"><label for="ce">Email</label><input id="ce" type="email" autocomplete="email" placeholder="you@byu.edu" required></div>
+      <div class="field" style="margin:0"><label for="cm">Message <span class="hint">(optional)</span></label><input id="cm" placeholder="When can I see it?"></div>
+      <div class="err" id="cerr">Add your name and a valid email.</div>
+      <button class="btn block" type="submit">Send to ${esc(l.seller_first_name||'the seller')}</button>
+      <span class="meta" style="font-size:12px">We share your name and contact only with this seller.</span></form>`; }
+  else if(CH.sent){ html+=`<div class="okbox"><span class="t">SENT</span><div>We'll connect you with ${esc(l.seller_first_name||'the seller')} within ${WS.replyTime} (usually much sooner) by text or email.</div><div class="meta">Next: tour the room, then the complex office completes the transfer.</div></div>`;
+    foot=`<div class="opts"><a class="btn ghost" href="#/" data-t="after-contact-browse">Keep browsing</a></div>`; }
+  else { foot=`<div class="opts">${Q[CH.a.length].opts.map((o,i)=>`<button class="opt" data-ans="${i}">${esc(o.l)}</button>`).join('')}</div>`; }
+  return `<div class="formwrap wrap"><a class="back" href="#/l/${encodeURIComponent(id)}">← Back to listing</a>
+   <div class="chat" style="margin-top:12px"><div class="hd"><div class="av" style="background:var(--brand-l);color:var(--brand)">✓</div><div><b>Quick check · ${esc(l.complex)}</b><div class="meta" style="font-size:12.5px">$${l.total}/mo · ${l.dates}</div></div></div>
+   <div class="bubbles">${html}</div>${foot}</div></div>`;
+}
+/* --- post a contract --- */
+const P=store.get('ws_post',{step:1,d:{room:'Private',near:'BYU',rule:'BYU',gender:"Women's",parking:'Included',amen:[],crosspost:true,screen:true}});
+const AMEN=['Furnished','In-unit washer/dryer','Dishwasher','A/C','Gym','Pool','Wi-Fi included','Pets OK'];
+function seg(k,opts){return `<div class="seg">${opts.map(o=>`<button type="button" data-seg="${k}" data-v="${esc(o)}" aria-pressed="${P.d[k]===o}">${esc(o)}</button>`).join('')}</div>`}
+function inp(k,label,o={}){return `<div class="field"><label for="p_${k}">${label}${o.req?' <span class="req">*</span>':''}${o.hint?` <span class="hint">${o.hint}</span>`:''}</label><input id="p_${k}" data-p="${k}" type="${o.type||'text'}" ${o.ph?`placeholder="${esc(o.ph)}"`:''} ${o.mode?`inputmode="${o.mode}"`:''} value="${esc(P.d[k]||'')}" ${o.ac?`autocomplete="${o.ac}"`:''}></div>`}
+function ptotal(){return num(P.d.rent)+num(P.d.util)+num(P.d.other)}
+function vPost(){
+  if(P.done) return `<div class="formwrap wrap"><div class="panel done"><div class="big">✓</div><h2 style="margin:0">Your contract is in</h2>
+    <p class="sub" style="margin:8px auto 18px;max-width:30em">We'll review it and post it within ${WS.replyTime}${P.d.crosspost?', then share it to the BYU/UVU housing groups and KSL for you':''}. We'll email ${esc(P.d.email)} to ask for 3–5 photos and confirm the details.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn" href="#/" data-t="post-done-browse">See contracts</a><button class="btn ghost" data-newpost>Post another</button></div></div></div>`;
+  const s=P.step, bar=`<div class="steps">${[1,2,3].map(i=>`<i class="${i<=s?'on':''}"></i>`).join('')}</div>`;
+  let body='';
+  if(s===1) body=`<h1 class="title">The contract</h1><p class="sub">Step 1 of 3 · about a minute</p>${bar}
+    ${inp('complex','Complex / apartment',{req:1,ph:'e.g. Elm Court'})}
+    <div class="field"><span class="lab">Room</span>${seg('room',['Private','Shared'])}</div>
+    <div class="field"><span class="lab">Closest campus</span>${seg('near',['BYU','UVU'])}</div>
+    <div class="field"><span class="lab">Complex rules</span>${seg('rule',['BYU','Open'])}<span class="hint">BYU = BYU-contracted housing (only BYU students can take it)</span></div>
+    <div class="field"><span class="lab">Housing type</span>${seg('gender',["Women's","Men's",'Co-ed'])}</div>
+    <div class="row2">${inp('start','Contract start',{req:1,type:'date'})}${inp('end','Contract end',{req:1,type:'date'})}</div>
+    <div class="err" id="perr">Add the complex and both contract dates.</div>
+    <div class="navrow"><button class="btn" data-pnext>Next</button></div>`;
+  if(s===2) body=`<h1 class="title">The money</h1><p class="sub">Step 2 of 3 · hidden fees are the #1 complaint we hear, so buyers see the full total</p>${bar}
+    <div class="row2">${inp('rent','Monthly rent',{req:1,ph:'$430',mode:'decimal'})}${inp('util','Utilities (avg.)',{ph:'$40',mode:'decimal'})}</div>
+    <div class="row2">${inp('other','Internet / other monthly',{ph:'$10',mode:'decimal'})}${inp('fee','Transfer fee',{ph:'$100, I pay it'})}</div>
+    <div class="totalbar"><span>Buyers will see</span><span id="ptot">$${ptotal()||'—'}/mo total</span></div>
+    <div class="field"><span class="lab">Parking</span>${seg('parking',['Included','Extra cost','None'])}</div>
+    <div class="field"><span class="lab">Amenities</span><div class="seg">${AMEN.map(a=>`<button type="button" data-amen="${esc(a)}" aria-pressed="${P.d.amen.includes(a)}">${esc(a)}</button>`).join('')}</div></div>
+    ${inp('why','Why you\'re leaving',{hint:'(optional, builds trust)',ph:'Spring internship in Seattle'})}
+    <div class="err" id="perr">Add the monthly rent.</div>
+    <div class="navrow"><button class="btn ghost" data-pback>Back</button><button class="btn" data-pnext>Next</button></div>`;
+  if(s===3) body=`<h1 class="title">You</h1><p class="sub">Step 3 of 3 · only your first name is shown on the listing</p>${bar}
+    <div class="row2">${inp('name','First name',{req:1,ac:'given-name'})}${inp('phone','Phone',{hint:'(fastest)',type:'tel',ac:'tel'})}</div>
+    ${inp('email','School email',{req:1,type:'email',ph:'you@byu.edu',ac:'email'})}
+    <label class="check"><input type="checkbox" data-pc="crosspost" ${P.d.crosspost?'checked':''}><span><b>Share it to the BYU/UVU Facebook groups and KSL for me</b><span>Free. We post it and send every reply back to you.</span></span></label>
+    <label class="check"><input type="checkbox" data-pc="screen" ${P.d.screen?'checked':''}><span><b>Screen buyers for me</b><span>We check school, dates and budget before anyone contacts you.</span></span></label>
+    <label class="check"><input type="checkbox" data-pc="agree" ${P.d.agree?'checked':''}><span><b>This is my contract and I'm allowed to transfer it</b><span>The complex office approves and completes the transfer.</span></span></label>
+    <div class="box" style="margin:6px 0 14px"><b>${esc(P.d.complex||'Your complex')} · ${esc(P.d.room)} room</b><div class="meta">$${ptotal()}/mo total · ${P.d.start?fmtD(P.d.start):'?'} – ${P.d.end?fmtD(P.d.end):'?'} · ${P.d.rule==='BYU'?'BYU-contracted':'Open to all'} · ${esc(P.d.gender)}</div></div>
+    <div class="err" id="perr">Add your first name, a valid email, and check the last box.</div>
+    <div class="navrow"><button class="btn ghost" data-pback>Back</button><button class="btn" data-psubmit>Submit my contract</button></div>`;
+  return `<div class="formwrap wrap">${body}</div>`;
+}
+function postValid(){const d=P.d;if(P.step===1)return d.complex&&d.start&&d.end&&d.end>d.start;if(P.step===2)return num(d.rent)>0;return d.name&&emailOk(d.email||'')&&d.agree}
+/* --- match --- */
+const M=store.get('ws_match',{school:'BYU',budget:550,move:'2027-01',len:'4-6',gender:"Women's",near:'Either',must:[],ran:false});
+function scoreL(l){
+  if(l.status==='taken')return null; const why=[];let s=0;
+  if(l.rule==='BYU'&&M.school!=='BYU')return null;
+  if(M.gender!=='Either'&&l.gender!=='Co-ed'&&!l.gender.toLowerCase().startsWith(M.gender.toLowerCase().slice(0,3)))return null;
+  const d=M.budget-l.total; if(d>=0){s+=35;why.push(d>=25?`$${d} under budget`:'Fits your budget')}else if(d>=-50){s+=12;why.push(`$${-d} over budget`)}else return null;
+  const want=new Date(M.move+'-01T12:00'),st=new Date(l.start+'T12:00'),dd=Math.abs((st-want)/864e5);
+  if(dd<=12){s+=25;why.push('Starts when you need it')}else if(dd<=40){s+=10;why.push('Start date is close')}else why.push('Different start month');
+  const [a,b]=M.len==='any'?[0,99]:M.len.split('-').map(Number); if(l.months>=a&&l.months<=b){s+=20;why.push(`${l.months}-month term fits`)}else why.push(`Runs ${l.months} months`);
+  if(M.near==='Either'||l.near===M.near){s+=10}else why.push('Closer to '+l.near);
+  const have=M.must.filter(x=>x==='Parking'?!/none/i.test(l.parking):l.amen.some(a=>a.toLowerCase().includes(x.toLowerCase().split(' ')[0])));
+  s+=M.must.length?Math.round(10*have.length/M.must.length):10;
+  return {l,score:Math.min(99,s),why};
+}
+function mseg(k,opts){return `<div class="seg">${opts.map(o=>`<button type="button" data-m="${k}" data-v="${o[0]}" aria-pressed="${M[k]===o[0]}">${o[1]}</button>`).join('')}</div>`}
+function vMatch(){
+  let res='';
+  if(M.ran){ const R=(LISTINGS||[]).map(scoreL).filter(Boolean).sort((a,b)=>b.score-a.score);
+    res=`<div class="panel" style="margin-top:18px"><h3>${R.length?`${R.length} contract${R.length===1?'':'s'} that fit`:'Nothing fits yet'}</h3><p class="sub">${R.length?'Ranked by budget, dates, length, campus and your must-haves.':'New contracts come in daily. Let us look for you.'}</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">${R.map(x=>`<a class="mrow" href="#/l/${encodeURIComponent(x.l.id)}" data-t="match-open" data-f="${esc(x.l.id)}"><div class="im">${x.l.photos[0]?`<img src="${esc(x.l.photos[0])}" alt="">`:ini(x.l)}</div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.l.complex)}</b><span class="score">${x.score}% fit</span></div><span class="meta">$${x.l.total}/mo · ${x.l.dates}</span><div class="why">${x.why.slice(0,3).map(w=>`<span>${/over|Different|Runs|Closer/.test(w)?'•':'✓'} ${esc(w)}</span>`).join('')}</div></div></a>`).join('')}</div></div>
+    <div class="panel" style="margin-top:14px;border-color:var(--brand)"><h3>Want us to find one for you?</h3><p class="sub">A person on our team checks the BYU/UVU groups, KSL and new posts every day and texts or emails you matches. Free.</p>
+      <form id="mf" novalidate style="margin-top:12px"><div class="row2"><div class="field"><label for="mn">First name</label><input id="mn" autocomplete="given-name"></div><div class="field"><label for="mp">Phone <span class="hint">(optional)</span></label><input id="mp" type="tel" autocomplete="tel"></div></div>
+      <div class="field"><label for="me">Email</label><input id="me" type="email" autocomplete="email" placeholder="you@byu.edu"></div><div class="err" id="merr">Add a valid email.</div>
+      <button class="btn block" type="submit">Find me a contract</button></form></div>`; }
+  return `<div class="formwrap wrap"><h1 class="title">Match me</h1><p class="sub">Tell us what you need. We'll rank every contract you actually qualify for.</p>
+    <div class="panel" style="margin-top:16px">
+    <div class="field"><span class="lab">I'm a…</span>${mseg('school',[['BYU','BYU student'],['UVU','UVU student'],['None','Not a student']])}</div>
+    <div class="field"><label for="mb">Max total per month: <span id="mbv" style="color:var(--brand)">$${M.budget}</span></label><input id="mb" type="range" min="300" max="900" step="10" value="${M.budget}"></div>
+    <div class="field"><span class="lab">Move-in month</span>${mseg('move',[['2026-12','Dec'],['2027-01','Jan'],['2027-02','Feb'],['2027-05','May']])}</div>
+    <div class="field"><span class="lab">How long?</span>${mseg('len',[['3-4','3–4 mo'],['4-6','4–6 mo'],['6-12','6–12 mo'],['any','Any']])}</div>
+    <div class="field"><span class="lab">Housing type</span>${mseg('gender',[["Women's","Women's"],["Men's","Men's"],['Either','Either']])}</div>
+    <div class="field"><span class="lab">Closest to</span>${mseg('near',[['BYU','BYU'],['UVU','UVU'],['Either','Either']])}</div>
+    <div class="field"><span class="lab">Must-haves</span><div class="seg">${['Parking','Furnished','Washer','Gym','A/C'].map(x=>`<button type="button" data-must="${x}" aria-pressed="${M.must.includes(x)}">${x}</button>`).join('')}</div></div>
+    <button class="btn block" data-mrun>${M.ran?'Update my matches':'Show my matches'}</button></div>${res}</div>`;
+}
+function vSaved(){const L=(LISTINGS||[]).filter(l=>saved().includes(l.id));
+  return `<div class="wrap section"><h2>Saved contracts</h2><p class="sub">Saved on this device.</p><div class="grid">${L.length?L.map(card).join(''):'<div class="panel empty"><h3>Nothing saved yet</h3><p>Tap the heart on any contract to keep it here.</p><a class="btn" href="#/">Browse contracts</a></div>'}</div></div>`}
+function vHow(){return `<div class="formwrap wrap"><h1 class="title">How it works</h1>
+  <div class="panel" style="margin-top:14px;display:flex;flex-direction:column;gap:14px">
+   <div><b>Selling</b><p class="sub">Post your contract in about 3 minutes. We review it, post it here, and share it to the BYU and UVU housing groups and KSL. Buyers answer 3 quick questions (school, dates, budget) before we connect them with you.</p></div>
+   <div><b>Looking</b><p class="sub">Every listing shows the total monthly cost. Contact a seller and we'll connect you within ${WS.replyTime}, or use Match me and we'll keep looking for you.</p></div>
+   <div><b>The transfer</b><p class="sub">The complex office approves and completes every contract transfer, same as always. We never take payment or hold money.</p></div>
+   <div><b>Who we are</b><p class="sub">White Stone is a student-run pilot at BYU for Winter 2027. Some listings are collected from public posts and link back to the original. We count anonymous taps to learn which features matter.</p></div>
+   <a class="btn ghost" href="demo.html" data-t="how-demo">See the full app concept (sample data)</a></div></div>`}
+
+/* ---------------- modals ---------------- */
+function openModal(html){$('#modal').innerHTML=`<button class="x" data-x aria-label="Close">×</button>`+html;$('#scrim').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>{const i=$('#modal input');if(i)i.focus()},40)}
+function closeModal(){$('#scrim').classList.remove('open');document.body.style.overflow=''}
+function alertModal(from){track('alert-open',from);
+  openModal(`<h3>Email me new contracts</h3><p class="sub">We'll email you when a contract that fits is posted. Unsubscribe any time.</p>
+  <form id="af" novalidate style="margin-top:14px"><div class="field"><label for="ae">Email</label><input id="ae" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
+  <div class="row2"><div class="field"><label for="am">Move-in month</label><select id="am"><option>Dec 2026</option><option selected>Jan 2027</option><option>Feb 2027</option><option>May 2027</option><option>Later</option></select></div>
+  <div class="field"><label for="ab">Max per month</label><select id="ab"><option>$400</option><option selected>$500</option><option>$600</option><option>$700+</option></select></div></div>
+  <div class="field"><label for="ag">Housing type</label><select id="ag"><option>Women's</option><option>Men's</option><option>Either</option></select></div>
+  <div class="err" id="aerr">Add a valid email.</div><button class="btn block" type="submit">Email me</button></form>`);
+  $('#af').dataset.from=from;}
+function soonModal(id){const s=SOON.find(x=>x.id===id);track('soon-'+id);
+  openModal(`<h3>${s.title}</h3><div class="note">${s.price?'We don\'t offer this yet and won\'t charge anything. Leave your email and we\'ll tell you if we launch it.':'This isn\'t built yet. We\'re building what students ask for most first.'}</div><p class="sub">${s.body}</p>
+  <form id="sf" novalidate style="margin-top:12px"><div class="field"><label for="se">Email <span class="hint">(optional)</span></label><input id="se" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
+  <button class="btn block" type="submit">${s.price?'Tell me if it launches':'Notify me'}</button></form>`);$('#sf').dataset.id=id;}
+
+/* ---------------- router ---------------- */
+async function route(){
+  const h=location.hash.replace(/^#\/?/,''), [r,arg]=h.split('/'); const id=arg?decodeURIComponent(arg):'';
+  const name=r||'home';
+  document.querySelectorAll('[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===(name==='l'||name==='contact'?'home':name)));
+  const app=$('#app');
+  if(name==='home'){app.innerHTML=vHome(); await loadListings(); renderResults();}
+  else { await loadListings();
+    app.innerHTML = name==='l'?vDetail(id): name==='contact'?vContact(id): name==='post'?vPost(): name==='match'?vMatch(): name==='saved'?vSaved(): name==='how'?vHow(): vHome();
+    if(name==='home')renderResults(); }
+  track('view-'+name, id);
+  window.scrollTo(0,0);
+}
+function rerender(keep){const y=window.scrollY;route().then(()=>{if(keep)window.scrollTo(0,y)})}
+window.addEventListener('hashchange',route);
+
+/* ---------------- events ---------------- */
 document.addEventListener('click',e=>{
-  const f=e.target.closest('[data-feature]'); if(f){e.preventDefault();openDoor(f.dataset.feature);return}
-  const t=e.target.closest('[data-track]'); if(t){track(t.dataset.track,t.textContent.trim())}
-  if(e.target.closest('[data-close]')||e.target===scrim){e.preventDefault();closeDoor()}
+  const t=e.target;
+  const sv=t.closest('[data-save]'); if(sv){e.preventDefault();e.stopPropagation();const id=sv.dataset.save;let s=saved();const on=!s.includes(id);s=on?s.concat(id):s.filter(x=>x!==id);store.set('ws_saved',s);track(on?'save':'unsave',id);toast(on?'Saved':'Removed');rerender(true);return}
+  const ch=t.closest('[data-chip]'); if(ch){const k=ch.dataset.chip;F.chips.has(k)?F.chips.delete(k):F.chips.add(k);ch.setAttribute('aria-pressed',F.chips.has(k));track('filter-'+k);renderResults();return}
+  if(t.closest('[data-clear]')){F.chips.clear();F.q='';rerender(true);return}
+  const al=t.closest('[data-alert]'); if(al){alertModal(al.dataset.alert);return}
+  const so=t.closest('[data-soon]'); if(so){soonModal(so.dataset.soon);return}
+  if(t.closest('[data-x]')||t===$('#scrim')){closeModal();return}
+  const sh=t.closest('[data-share]'); if(sh){const u=location.href.split('#')[0].split('?')[0]+'?src=share#/l/'+encodeURIComponent(sh.dataset.share);track('share',sh.dataset.share);
+    if(navigator.share){navigator.share({title:'Housing contract on White Stone',url:u}).catch(()=>{})}else{navigator.clipboard&&navigator.clipboard.writeText(u).then(()=>toast('Link copied'),()=>toast(u))}return}
+  const ph=t.closest('[data-ph]'); if(ph){const g=$('#gal'),l=byId(location.hash.split('/')[2]&&decodeURIComponent(location.hash.split('/')[2]));if(!l)return;let i=(+g.dataset.i+ +ph.dataset.ph+l.photos.length)%l.photos.length;g.dataset.i=i;g.querySelector('img').src=l.photos[i];$('#phc').textContent=(i+1)+' / '+l.photos.length;track('photo-next',l.id);return}
+  const an=t.closest('[data-ans]'); if(an){CH.a.push(+an.dataset.ans);const l=byId(CH.id),q=chatQs(l)[CH.a.length-1];track('screen-'+q.k+'-'+q.opts[+an.dataset.ans].l.toLowerCase().replace(/[^a-z]+/g,'-'),CH.id);rerender(true);return}
+  if(t.closest('[data-restart]')){CH=null;rerender(true);return}
+  const sg=t.closest('[data-seg]'); if(sg){P.d[sg.dataset.seg]=sg.dataset.v;store.set('ws_post',P);sg.parentNode.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===sg));return}
+  const am=t.closest('[data-amen]'); if(am){const v=am.dataset.amen;P.d.amen=P.d.amen.includes(v)?P.d.amen.filter(x=>x!==v):P.d.amen.concat(v);store.set('ws_post',P);am.setAttribute('aria-pressed',P.d.amen.includes(v));return}
+  if(t.closest('[data-pnext]')){if(!postValid()){$('#perr').style.display='block';return}P.step++;store.set('ws_post',P);track('post-step-'+P.step);rerender();return}
+  if(t.closest('[data-pback]')){P.step--;store.set('ws_post',P);rerender();return}
+  if(t.closest('[data-psubmit]')){if(!postValid()){$('#perr').style.display='block';return}const d=P.d;
+    const details=`${d.complex} | ${d.room} room | near ${d.near} | ${d.rule==='BYU'?'BYU-contracted':'Open'} | ${d.gender} | ${d.start} to ${d.end} | rent $${num(d.rent)} + utilities $${num(d.util)} + other $${num(d.other)} = $${ptotal()}/mo | transfer fee: ${d.fee||'?'} | parking: ${d.parking} | amenities: ${d.amen.join(', ')||'-'} | why leaving: ${d.why||'-'} | crosspost: ${d.crosspost?'yes':'no'} | screen buyers: ${d.screen?'yes':'no'} | school: ${school(d.email)}`;
+    submit('seller',{name:d.name,email:d.email,phone:d.phone||'',details});P.done=true;store.set('ws_post',P);rerender();return}
+  if(t.closest('[data-newpost]')){Object.assign(P,{step:1,done:false,d:{room:'Private',near:'BYU',rule:'BYU',gender:"Women's",parking:'Included',amen:[],crosspost:true,screen:true}});store.set('ws_post',P);rerender();return}
+  const mm=t.closest('[data-m]'); if(mm){M[mm.dataset.m]=mm.dataset.v;store.set('ws_match',M);mm.parentNode.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===mm));return}
+  const mu=t.closest('[data-must]'); if(mu){const v=mu.dataset.must;M.must=M.must.includes(v)?M.must.filter(x=>x!==v):M.must.concat(v);store.set('ws_match',M);mu.setAttribute('aria-pressed',M.must.includes(v));return}
+  if(t.closest('[data-mrun]')){M.ran=true;store.set('ws_match',M);track('match-run',`${M.school}|$${M.budget}|${M.move}|${M.len}|${M.gender}|${M.near}|${M.must.join('+')}`);rerender();setTimeout(()=>{const p=document.querySelectorAll('.panel')[1];p&&p.scrollIntoView({behavior:'smooth'})},60);return}
+  const tr=t.closest('[data-t]'); if(tr){track(tr.dataset.t,tr.dataset.f||'')}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDoor()});
-/* carry ?src= into the demo link so demo usage is attributed to the same channel */
-document.querySelectorAll('a[href="demo.html"]').forEach(a=>a.href='demo.html?src='+encodeURIComponent(SRC)+(DEBUG?'&debug':''));
+document.addEventListener('input',e=>{const t=e.target;
+  if(t.id==='q'){F.q=t.value;renderResults();return}
+  if(t.dataset.p){P.d[t.dataset.p]=t.value;store.set('ws_post',P);const pt=$('#ptot');if(pt)pt.textContent='$'+(ptotal()||'—')+'/mo total';return}
+  if(t.id==='mb'){M.budget=+t.value;store.set('ws_match',M);$('#mbv').textContent='$'+t.value;return}
+});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='sort'){F.sort=t.value;track('sort-'+t.value);renderResults();return}
+  if(t.dataset.pc){P.d[t.dataset.pc]=t.checked;store.set('ws_post',P);return}
+});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;
+  if(f.id==='cf'){const n=$('#cn').value.trim(),em=$('#ce').value.trim();if(!n||!emailOk(em)){$('#cerr').style.display='block';return}
+    const l=byId(CH.id),Q=chatQs(l);submit('contact',{name:n,email:em,phone:$('#cp').value.trim(),listing_id:l.id,details:`${l.complex} ($${l.total}/mo, ${l.dates}) | answers: ${CH.a.map((a,i)=>Q[i].k+'='+Q[i].opts[a].l).join(', ')} | message: ${$('#cm').value.trim()||'-'} | school email: ${school(em)}`});CH.sent=true;rerender(true);return}
+  if(f.id==='mf'){const em=$('#me').value.trim();if(!emailOk(em)){$('#merr').style.display='block';return}
+    submit('match_request',{name:$('#mn').value.trim(),email:em,phone:$('#mp').value.trim(),details:`${M.school} | max $${M.budget}/mo | move ${M.move} | length ${M.len} | ${M.gender} | near ${M.near} | must: ${M.must.join(', ')||'-'}`});
+    f.outerHTML=`<div class="okbox" style="margin-top:12px"><span class="t">YOU'RE ON IT</span><div>We'll text or email you matches as they come in, starting within ${WS.replyTime}.</div></div>`;return}
+  if(f.id==='af'){const em=$('#ae').value.trim();if(!emailOk(em)){$('#aerr').style.display='block';return}
+    submit('alert',{email:em,details:`move ${$('#am').value} | max ${$('#ab').value} | ${$('#ag').value} | from ${f.dataset.from}`});$('#modal').innerHTML=`<button class="x" data-x aria-label="Close">×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">You're on the list</h3><p class="sub">We'll email ${esc(em)} when a contract that fits is posted.</p></div>`;return}
+  if(f.id==='sf'){const em=$('#se').value.trim();if(em&&!emailOk(em)){return}
+    if(em)submit('waitlist',{email:em,listing_id:f.dataset.id,details:'interested in '+f.dataset.id});else track('soon-confirm-noemail',f.dataset.id);
+    $('#modal').innerHTML=`<button class="x" data-x aria-label="Close">×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">Thanks, that helps</h3><p class="sub">${em?'We\'ll let you know if we build it.':'Your vote is counted.'}</p></div>`;return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+track('visit@'+SRC);
+route();
 </script>
 </body>
 </html>
