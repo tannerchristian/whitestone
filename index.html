@@ -63,7 +63,7 @@ header.top .wrap{height:72px;display:flex;align-items:center;justify-content:spa
 .pillsearch span:nth-child(3){border:none;color:var(--mute);font-weight:500}
 .pillsearch i{width:34px;height:34px;border-radius:17px;background:var(--brand);display:flex;align-items:center;justify-content:center}
 .topnav{display:flex;gap:4px;align-items:center}
-.topnav a{text-decoration:none;color:var(--ink2);font-weight:600;font-size:14.5px;padding:10px 14px;border-radius:999px}
+.topnav a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-weight:600;font-size:14.5px;padding:10px 14px;border-radius:999px}
 .topnav a:hover{background:var(--soft)}
 .topnav a.on{color:var(--ink);background:var(--soft)}
 .topnav a.cta{background:var(--ink);color:#fff}
@@ -293,7 +293,39 @@ footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
 footer b{color:var(--ink);display:block;margin-bottom:8px}
 footer a{color:var(--ink2);text-decoration:none;display:block;padding:3px 0} footer a:hover{text-decoration:underline}
 .loading{grid-column:1/-1;color:var(--mute);padding:40px 0;text-align:center}
+.cat{text-decoration:none}
+.cat[aria-current=page]{color:var(--ink);opacity:1;border-bottom-color:var(--ink)}
+.cathero{position:relative;height:280px;border-radius:26px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;margin-top:20px;background:#1D2433}
+.cathero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cathero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,18,28,.05) 20%,rgba(15,18,28,.8))}
+.cathero>div{position:relative;z-index:2;padding:28px}
+.cathero h1{margin:12px 0 6px;font-size:40px;line-height:1.05}
+.cathero p{margin:0;max-width:42em;color:#EDEFF3;font-size:16px}
+.rhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rhead h2{font-size:24px;margin:0}
+.tag.warn{background:#FDF3E1;color:#7A4E0E}
+.ph .none.src{color:#6A7385} .ph .none.src b{color:#9AA2B1;font-size:30px}
+.webnote{background:var(--gold-l);color:#7A4E0E;border-radius:14px;padding:12px 14px;font-size:14px}
+.askbtn{position:fixed;right:20px;bottom:24px;z-index:60;display:flex;gap:8px;align-items:center;border:none;border-radius:999px;background:var(--brand);color:#fff;font-weight:700;font-size:14.5px;padding:13px 18px;box-shadow:var(--shadow2);cursor:pointer}
+.askbtn:hover{background:var(--brand-d)}
+.askpanel{position:fixed;right:20px;bottom:24px;z-index:85;width:390px;max-width:calc(100vw - 24px);height:min(620px,calc(100vh - 110px));background:#fff;border-radius:22px;box-shadow:var(--shadow2);border:1px solid var(--line);display:none;flex-direction:column;overflow:hidden}
+.askpanel.on{display:flex}
+.askhd{display:flex;gap:10px;align-items:center;padding:14px 56px 14px 16px;border-bottom:1px solid var(--line);position:relative}
+.askhd b{display:block;font-size:15px}.askhd span{font-size:12.5px;color:var(--mute)}
+.askav{width:40px;height:40px;border-radius:12px;background:var(--brand-l);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.askhd .x{top:14px;right:12px;box-shadow:none;background:var(--soft)}
+.askbody{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:#FCFCFB}
+.askbody .b{font-size:14.5px}
+.askbody .b a{color:var(--brand);font-weight:700}
+.askopts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.askopts button{border:1.5px solid var(--ink);background:#fff;border-radius:999px;padding:7px 12px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink)}
+.askopts button:hover{background:var(--soft)}
+.askin{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.askin input{flex:1;border:1.5px solid #D9DCE2;border-radius:12px;padding:10px 12px;outline:none;min-width:0}
+.askin input:focus{border-color:var(--ink)}
+.hasc .askbtn{display:none}
 @media (max-width:1320px){.searchin{display:none}}
+@media (max-width:1420px){.pillsearch{display:none}}
 @media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pillsearch{display:none}}
 @media (max-width:900px){
   .hero .wrap{grid-template-columns:1fr;gap:22px;padding-top:90px}
@@ -334,6 +366,10 @@ footer a{color:var(--ink2);text-decoration:none;display:block;padding:3px 0} foo
   .ctaband div{padding:26px}
   .soon{grid-template-columns:1fr}
   .amen{grid-template-columns:1fr}
+  .cathero{height:240px}.cathero h1{font-size:30px}
+  .askbtn{bottom:84px;right:12px;padding:13px}
+  .askbtn span{display:none}
+  .askpanel{inset:0;width:auto;max-width:none;height:auto;border-radius:0;border:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -344,6 +380,7 @@ footer a{color:var(--ink2);text-decoration:none;display:block;padding:3px 0} foo
   <button class="pillsearch" data-t="pill-search" data-focus-search aria-label="Search contracts"><span>Near BYU or UVU</span><span>Winter 2027</span><span>Any budget</span><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></i></button>
   <nav class="topnav" id="topnav">
     <a href="#/" data-r="home">Find a contract</a>
+    <a href="#/web" data-r="web">Around the web</a>
     <a href="#/match" data-r="match">Match me</a>
     <a href="#/saved" data-r="saved">Saved</a>
     <a href="#/post" data-r="post" class="cta">Post your contract</a>
@@ -355,12 +392,13 @@ footer a{color:var(--ink2);text-decoration:none;display:block;padding:3px 0} foo
 <footer><div class="wrap">
   <div><a class="logo" href="#/" style="margin-bottom:10px"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Student<b>Match</b></a>
     <span>A student-run pilot for Winter 2027 housing contract transfers in Provo and Orem. Free for students; we never take payment. The complex office completes every transfer.</span></div>
-  <div><b>Students</b><a href="#/">Find a contract</a><a href="#/post">Post your contract</a><a href="#/match">Match me</a><a href="#/saved">Saved</a></div>
+  <div><b>Students</b><a href="#/">Find a contract</a><a href="#/web">Around the web</a><a href="#/post">Post your contract</a><a href="#/match">Match me</a><a href="#/saved">Saved</a></div>
   <div><b>About</b><a href="#/how">How it works</a><a href="#/how">Privacy & cookies</a><a href="demo.html">Full app concept (sample data)</a><button class="link" data-consent-open style="font-size:14px;color:var(--ink2);text-decoration:none;padding:3px 0">Cookie settings</button></div>
 </div></footer>
 
 <nav class="tabs" id="tabs">
   <a href="#/" data-r="home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Explore</a>
+  <a href="#/web" data-r="web"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Web</a>
   <a href="#/match" data-r="match"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Match</a>
   <a href="#/post" data-r="post"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg>Post</a>
   <a href="#/saved" data-r="saved"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>Saved</a>
@@ -442,6 +480,9 @@ const IC={
  star:'<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/>',
  swap:'<path d="M7 7h12l-3-3M17 17H5l3 3"/>',
  hand:'<path d="M7 11V5a2 2 0 0 1 4 0v5M11 10V4a2 2 0 0 1 4 0v6M15 10V6a2 2 0 0 1 4 0v8a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.5L3 14a2 2 0 0 1 3.4-2L7 13"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+ chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>',
+ db:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
  cards:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M3 6v12M21 6v12"/>'
 };
 const ic=(n,s=22,c='currentColor',w=1.9)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]||''}</svg>`;
@@ -459,7 +500,7 @@ function normalize(o){
   L.amen=String(o.amenities||'').split(/[;,]/).map(s=>s.trim()).filter(Boolean);
   L.near=(o.near||'BYU').trim().toUpperCase()==='UVU'?'UVU':'BYU'; L.rule=/byu/i.test(o.school_rule||'')?'BYU':'Open'; L.gender=(o.gender||'Co-ed').trim();
   L.dist=num(o.distance_mi); L.external=!!(o.source_url&&!/white\s*stone|studentmatch|posted here/i.test(o.source||''));
-  L.lat=num(o.lat); L.lng=num(o.lng); L.hasLoc=!!(L.lat&&L.lng);
+  L.unv=L.status==='unverified'; L.lat=num(o.lat); L.lng=num(o.lng); L.hasLoc=!!(L.lat&&L.lng);
   return L;
 }
 async function loadListings(){
@@ -468,7 +509,7 @@ async function loadListings(){
   try{
     const t=await fetch(WS.listingsCsv+(WS.listingsCsv.includes('?')?'&':'?')+'t='+Math.floor(Date.now()/60000)).then(r=>{if(!r.ok)throw 0;return r.text()});
     const rows=parseCSV(t).filter(r=>r.some(c=>c.trim())); const h=rows.shift().map(s=>s.trim());
-    LISTINGS=rows.map(r=>normalize(Object.fromEntries(h.map((k,i)=>[k,r[i]||''])))).filter(l=>l.id&&(l.status==='live'||l.status==='taken'));
+    LISTINGS=rows.map(r=>normalize(Object.fromEntries(h.map((k,i)=>[k,r[i]||''])))).filter(l=>l.id&&['live','taken','unverified'].includes(l.status));
   }catch(e){ LOAD_ERR=true; LISTINGS=[]; }
   return LISTINGS;
 }
@@ -481,48 +522,77 @@ function card(l){
   const sv=saved().includes(l.id), taken=l.status==='taken', P=l.photos;
   const media=P.length?`<div class="slides" data-slides="${esc(l.id)}" data-i="0">${P.slice(0,6).map((u,i)=>`<img src="${esc(u)}" alt="${esc(l.complex)} photo ${i+1}" loading="lazy">`).join('')}</div>
       ${P.length>1?`<button class="nav" style="left:8px" data-slide="-1" data-id="${esc(l.id)}" aria-label="Previous photo">‹</button><button class="nav" style="right:8px" data-slide="1" data-id="${esc(l.id)}" aria-label="Next photo">›</button><div class="dots">${P.slice(0,6).map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}`
-    :`<div class="none"><b>${ini(l)}</b>Photos coming soon</div>`;
-  return `<a class="card ${taken?'isTaken':''}" href="#/l/${encodeURIComponent(l.id)}" data-t="open-listing" data-f="${esc(l.id)}">
+    :l.unv?`<div class="none src"><b>${esc(srcName(l))}</b>See photos on the original post</div>`:`<div class="none"><b>${ini(l)}</b>Photos coming soon</div>`;
+  return `<a class="card ${taken?'isTaken':''}" href="#/l/${encodeURIComponent(l.id)}" data-t="${l.unv?'open-web-listing':'open-listing'}" data-f="${esc(l.id)}">
    <div class="ph">${media}
-     <div class="tl">${taken?'<span class="tag taken">Taken</span>':(l.months<=6?'<span class="tag">Short-term · '+l.months+' mo</span>':'<span class="tag ok">Available</span>')}${l.external?'<span class="tag dark">via '+esc(l.source||'Facebook')+'</span>':''}</div>
+     <div class="tl">${l.unv?`<span class="tag warn">Unverified</span><span class="tag dark">${esc(srcName(l))}</span>`:taken?'<span class="tag taken">Taken</span>':(l.months<=6?'<span class="tag">Short-term · '+l.months+' mo</span>':'<span class="tag ok">Available</span>')}${!l.unv&&l.external?'<span class="tag dark">via '+esc(l.source||'Facebook')+'</span>':''}</div>
      <div class="tr"><button class="heart" data-save="${esc(l.id)}" aria-label="Save">${HEART(sv)}</button></div></div>
    <div class="cb"><div class="t"><b>${esc(l.complex)}</b><span class="meta">${l.dist?l.dist+' mi to '+esc(l.near):esc(l.near)}</span></div>
      <span class="meta">${esc(l.title||l.room+' room')}</span>
      <span class="meta">${l.dates} · ${l.rule==='BYU'?'BYU-contracted':'Open to all'} · ${esc(l.gender)}</span>
-     <span class="price">$${l.total} <small>/ month total</small></span></div></a>`;
+     <span class="price">$${l.total} <small>/ month ${l.unv?'as listed':'total'}</small></span></div></a>`;
 }
 const SOON=[
- {id:'search-all-sites',icon:'search',title:'Search every site at once',body:'Facebook groups, KSL and Marketplace in one feed.'},
- {id:'verified',icon:'shield',title:'Verified students only',body:'Everyone confirms a BYU or UVU email.'},
- {id:'swipe',icon:'cards',title:'Swipe through rooms',body:'Big photos first. Swipe to pass or save.'},
- {id:'ratings',icon:'star',title:'Seller ratings',body:'See how past transfers went.'},
- {id:'ai-screening',icon:'bolt',title:'Automatic reply screening',body:'Every reply screened for school, dates and budget.'},
+ {id:'instant-alerts-all-sites',icon:'bolt',title:'Instant alerts from every site',body:'A text the minute a contract that fits shows up on KSL, Marketplace or here.'},
+ {id:'verified-transfer',icon:'shield',title:'Office-verified listings',body:'We confirm with the complex office that the contract is real and transferable.'},
+ {id:'complex-database',icon:'db',title:'Every complex\'s transfer rules',body:'Transfer fee, approval time and who can take it, for every Provo/Orem complex.'},
+ {id:'ai-assistant-sellers',icon:'chat',title:'An AI that answers buyers for you',body:'Replies to every buyer, answers questions and books tours while you\'re busy.'},
+ {id:'verified',icon:'check',title:'Verified students only',body:'Everyone confirms a BYU or UVU email.'},
  {id:'semester-partner',icon:'swap',title:'Find a semester partner',body:'Pair with someone who needs the opposite months.'},
  {id:'fill-my-contract-49',icon:'hand',title:'Fill my contract for me · $49',body:'We handle everything; pay only when it transfers.',price:1},
  {id:'featured-listing-10',icon:'star',title:'Featured listing · $10',body:'Top of search for people with your dates.',price:1}
 ];
 function soonGrid(){return `<div class="soon">${SOON.map(s=>`<button data-soon="${s.id}"><span class="ico">${ic(s.icon,20,'#CF4429',2)}</span><em>${s.price?'Paid option':'Coming soon'}</em><b>${s.title}</b><span>${s.body}</span></button>`).join('')}</div>`}
 
-/* ---------------- filters ---------------- */
-const F={q:'',cat:'all',sort:'new',campus:'any',move:'any',max:0,map:false};
-const CATS=[['all','All','grid'],['short','4–6 months','short'],['summer','Spring & summer','summer'],['u500','Under $500','cheap'],['private','Private room','priv'],['shared','Shared room','shared'],['women',"Women's",'women'],['men',"Men's",'men'],['parking','Parking','car'],['byu','Near BYU','byu'],['uvu','Near UVU','mountain']];
-function filtered(){
-  let L=(LISTINGS||[]).slice(); const q=F.q.trim().toLowerCase(), c=F.cat;
-  L=L.filter(l=>{
-    if(q&&!(l.complex+' '+l.title+' '+l.near+' '+l.dates).toLowerCase().includes(q))return false;
+/* ---------------- filters + categories ---------------- */
+const F={q:'',cat:'all',sort:'new',campus:'any',move:'any',max:0,map:false,src:'All'};
+let MODE='home';
+// [key, rail label, icon, page title, page blurb, photo, noun]
+const CATS=[
+ ['all','All','grid','All contracts','Every contract posted on StudentMatch, plus listings we found around the web.',PH.living,'All contracts'],
+ ['short','4–6 months','short','4–6 month contracts','Semester-length contracts from students leaving for internships, missions and study abroad.',PH.valley,'4–6 month contracts'],
+ ['summer','Spring & summer','summer','Spring & summer contracts','Contracts starting April–June, for spring/summer terms and Utah internships.',PH.peaks,'Spring & summer contracts'],
+ ['u500','Under $500','cheap','Under $500 a month, all in','Rent, utilities and monthly fees added up. Every contract here totals $500 or less.',PH.desk,'Contracts under $500'],
+ ['private','Private room','priv','Private rooms','Your own bedroom in a shared apartment.',PH.bed,'Private rooms'],
+ ['shared','Shared room','shared','Shared rooms','The cheapest way to live close to campus.',PH.twin,'Shared rooms'],
+ ['women',"Women's",'women',"Women's housing","Women's and co-ed contracts.",PH.living3,"Women's contracts"],
+ ['men',"Men's",'men',"Men's housing","Men's and co-ed contracts.",PH.living2,"Men's contracts"],
+ ['parking','Parking','car','Contracts with parking','A parking spot is included or available to buy.',PH.street,'Contracts with parking'],
+ ['byu','Near BYU','byu','Near BYU','Walk or bike to BYU campus.',PH.field,'Contracts near BYU'],
+ ['uvu','Near UVU','mountain','Near UVU','Orem and north Provo, close to UVU.',PH.snow,'Contracts near UVU']];
+const CAT=k=>CATS.find(c=>c[0]===k)||CATS[0];
+const VER=()=>(LISTINGS||[]).filter(l=>!l.unv), WEB=()=>(LISTINGS||[]).filter(l=>l.unv);
+const srcName=l=>(l.source||'the web').trim();
+function catOk(l,c){
+  if(c==='short')return l.months>=3.5&&l.months<=6.5;
+  if(c==='summer')return /^\d{4}-0[4-6]/.test(l.start||'');
+  if(c==='u500')return l.total>0&&l.total<=500;
+  if(c==='private')return /private/i.test(l.room); if(c==='shared')return /shared/i.test(l.room);
+  if(c==='women')return !/^men/i.test(l.gender); if(c==='men')return !/women/i.test(l.gender);
+  if(c==='parking')return !/none/i.test(l.parking||'none'); if(c==='byu')return l.near==='BYU'; if(c==='uvu')return l.near==='UVU';
+  return true;
+}
+function filtered(pool){
+  const q=F.q.trim().toLowerCase();
+  const L=pool.filter(l=>{
+    if(q&&!(l.complex+' '+l.title+' '+l.near+' '+l.dates+' '+l.source).toLowerCase().includes(q))return false;
     if(F.campus!=='any'&&l.near!==F.campus)return false;
     if(F.move!=='any'&&!(l.start||'').startsWith(F.move))return false;
     if(F.max&&l.total>F.max)return false;
-    if(c==='short'&&!(l.months>=3.5&&l.months<=6.5))return false;
-    if(c==='summer'&&!/^\d{4}-0[4-6]/.test(l.start||''))return false;
-    if(c==='u500'&&l.total>500)return false;
-    if(c==='private'&&!/private/i.test(l.room))return false; if(c==='shared'&&!/shared/i.test(l.room))return false;
-    if(c==='women'&&/^men/i.test(l.gender))return false; if(c==='men'&&/women/i.test(l.gender))return false;
-    if(c==='parking'&&/none/i.test(l.parking))return false; if(c==='byu'&&l.near!=='BYU')return false; if(c==='uvu'&&l.near!=='UVU')return false;
+    if(!catOk(l,F.cat))return false;
+    if(l.unv&&F.src!=='All'){const s=srcName(l).toLowerCase();
+      if(F.src==='KSL'&&!s.includes('ksl'))return false;
+      if(F.src==='Marketplace'&&!/marketplace|facebook/.test(s))return false;
+      if(F.src==='Other'&&/ksl|marketplace|facebook/.test(s))return false;}
     return true});
-  const s={new:(a,b)=>String(b.posted||'').localeCompare(String(a.posted||'')),price:(a,b)=>a.total-b.total,soon:(a,b)=>String(a.start).localeCompare(String(b.start))}[F.sort];
-  L.sort((a,b)=>(a.status==='taken')-(b.status==='taken')||s(a,b)); return L;
+  const so={new:(a,b)=>String(b.posted||'').localeCompare(String(a.posted||'')),price:(a,b)=>a.total-b.total,soon:(a,b)=>String(a.start).localeCompare(String(b.start))}[F.sort];
+  L.sort((a,b)=>(a.status==='taken')-(b.status==='taken')||so(a,b)); return L;
 }
+function railHtml(){return `<div class="rail"><div class="wrap">
+    ${CATS.map(c=>`<a class="cat" href="#/c/${c[0]}" ${MODE==='cat'&&F.cat===c[0]?'aria-current="page"':''}>${ic(c[2],24)}${c[1]}</a>`).join('')}
+    <div class="railtools"><label class="searchin">${ic('search',16,'#6A7385',2.2)}<span class="sr">Search</span><input id="q" placeholder="Complex or dates" value="${esc(F.q)}"></label>
+      <select id="sort" aria-label="Sort"><option value="new"${F.sort==='new'?' selected':''}>Newest</option><option value="price"${F.sort==='price'?' selected':''}>Lowest price</option><option value="soon"${F.sort==='soon'?' selected':''}>Soonest start</option></select></div>
+  </div></div>`}
 
 /* ---------------- views ---------------- */
 function vHome(){
@@ -548,11 +618,7 @@ function vHome(){
     </div>
     <button class="mute-btn" data-mute>${m?'🔇 Sound off':'🔊 Sound on'}</button>
   </section>
-  <div class="rail"><div class="wrap">
-    ${CATS.map(c=>`<button class="cat" data-cat="${c[0]}" aria-pressed="${F.cat===c[0]}">${ic(c[2],24)}${c[1]}</button>`).join('')}
-    <div class="railtools"><label class="searchin">${ic('search',16,'#6A7385',2.2)}<span class="sr">Search</span><input id="q" placeholder="Complex or dates" value="${esc(F.q)}"></label>
-      <select id="sort" aria-label="Sort"><option value="new"${F.sort==='new'?' selected':''}>Newest</option><option value="price"${F.sort==='price'?' selected':''}>Lowest price</option><option value="soon"${F.sort==='soon'?' selected':''}>Soonest start</option></select></div>
-  </div></div>
+  ${railHtml()}
   <section class="wrap section" id="results-sec" style="padding-top:22px"><div id="results"><div class="grid"><div class="loading">Loading contracts…</div></div></div></section>
   <section class="wrap section"><div class="split">
     <div class="media"><video autoplay muted loop playsinline preload="none" poster="${U(PH.friends,1000)}" data-lazyvid="${VID.roommates}" aria-label="Roommates talking on a couch"></video>
@@ -568,6 +634,13 @@ function vHome(){
       <p>Filter by campus, move-in month and real monthly total. Tell us what you need and we'll keep looking for you.</p>
       <ul class="checks"><li>4–6 month contracts, spring & summer, internships</li><li>Total monthly cost on every listing</li><li>We check the groups and KSL daily and send you matches</li></ul>
       <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn dark" href="#/match" data-t="band-match">Match me</a><button class="btn ghost" data-alert="band">Email me new contracts</button></div></div></div></section>
+  <section class="wrap section"><div class="split">
+    <div class="media"><img src="${U(PH.street,1000)}" alt="Student walking into an apartment building" loading="lazy">
+      <div class="badge">${ic('globe',22,'#CF4429',2)}<div><b>KSL + StudentMatch in one feed</b><span>Public listings gathered daily, clearly marked unverified</span></div></div></div>
+    <div><span class="eyebrow">Only on StudentMatch</span><h2>Every contract in Provo, in one place.</h2>
+      <p>Stop refreshing KSL every morning. We gather public listings and StudentMatch contracts into one feed, and we'll check any listing for you before you commit.</p>
+      <ul class="checks"><li>Public KSL listings and more, gathered every day</li><li>Ask us to check any listing: still available, real monthly total, transfer rules</li><li>An assistant that answers contract questions any time, with a real person behind it</li></ul>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#/web" data-t="band-web">Browse around the web</a><button class="btn ghost" data-askopen="band">Ask the assistant</button></div></div></div></section>
   <section class="wrap section"><h2>Explore by area</h2><p class="sub">Tap an area to filter contracts.</p>
     <div class="areas">
       <button class="area" data-area="BYU"><img src="${U(PH.field,700)}" alt="" loading="lazy"><span><b>Near BYU</b><small>Walk or bike to campus</small></span></button>
@@ -589,20 +662,57 @@ function vHome(){
   <section class="wrap section"><div class="ctaband"><img src="${U(PH.group,1600)}" alt="" loading="lazy"><div><h2>Don't pay for a room you're not using.</h2><p>Post your Winter 2027 contract free. We'll find students who fit and send them to you.</p><a class="btn" href="#/post" data-t="cta-post">Post my contract</a></div></div></section>
   <button class="maptoggle" id="maptoggle" data-map>${ic('map',18,'#fff',2)} Show map</button>`;
 }
+const COLLAGE=`<div class="collage"><img src="${U(PH.bed,800)}" alt="" loading="lazy"><img src="${U(PH.living2,600)}" alt="" loading="lazy"><img src="${U(PH.boxes,600)}" alt="" loading="lazy"></div>`;
+function emptyBlock(c,filt){
+  if(filt) return `<div class="panel" style="text-align:center"><h3>Nothing matches those filters</h3><p class="sub">Clear a filter, or let us look for you.</p><div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap"><button class="btn ghost" data-clear>Clear filters</button><a class="btn" href="#/match">Match me</a></div></div>`;
+  const isCat=MODE==='cat'&&c[0]!=='all';
+  return `<div class="emptyhero"><div><span class="eyebrow">New this week</span><h2 style="margin:6px 0 10px;font-size:32px">${isCat?'No '+esc(c[6].toLowerCase())+' posted yet':'Winter 2027 contracts are being added now'}</h2>
+      <p class="sub" style="margin-bottom:18px">${isCat?'Students are posting Winter 2027 contracts now. Get an email the moment one like this is posted, check what we found around the web, or post yours.':'We\'re collecting contracts from students who are leaving for internships, missions and study abroad. Get an email the moment one matches your dates, or post yours and be one of the first.'}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-alert="${isCat?'cat-'+c[0]:'empty'}">Email me new contracts</button><a class="btn ghost" href="#/post" data-t="empty-post" data-f="${c[0]}">Post my contract</a>${MODE==='cat'?'<a class="btn ghost" href="#/web" data-t="cat-to-web" data-f="'+c[0]+'">Search around the web</a>':''}</div></div>${COLLAGE}</div>`;
+}
+function webEmpty(){
+  return `<div class="emptyhero"><div><span class="eyebrow">Launching now</span><h2 style="margin:6px 0 10px;font-size:32px">We're gathering contracts from KSL and other sites</h2>
+    <p class="sub" style="margin-bottom:18px">Our team checks KSL Classifieds and other public listings for Provo and Orem contracts every day and adds them here. Get a daily email with every new one that fits, or have us look for you.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-alert="web-digest">Get the daily digest</button><a class="btn ghost" href="#/match" data-t="web-match">Have us look for me</a><button class="btn ghost" data-askopen="web-empty">Ask the assistant</button></div></div>${COLLAGE}</div>`;
+}
 function renderResults(){
   const el=$('#results'); if(!el)return;
   if(!LISTINGS){el.innerHTML='<div class="grid"><div class="loading">Loading contracts…</div></div>';return}
-  const L=filtered(), all=LISTINGS.length, mt=$('#maptoggle');
-  if(mt) mt.style.display=all?'flex':'none';
-  if(!all){el.innerHTML=`<div class="emptyhero"><div><span class="eyebrow">New this week</span><h2 style="margin:6px 0 10px;font-size:32px">Winter 2027 contracts are being added now</h2>
-      <p class="sub" style="margin-bottom:18px">We're collecting contracts from students who are leaving for internships, missions and study abroad. Get an email the moment one matches your dates, or post yours and be one of the first.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-alert="empty">Email me new contracts</button><a class="btn ghost" href="#/post" data-t="empty-post">Post my contract</a></div></div>
-    <div class="collage"><img src="${U(PH.bed,800)}" alt="" loading="lazy"><img src="${U(PH.living2,600)}" alt="" loading="lazy"><img src="${U(PH.boxes,600)}" alt="" loading="lazy"></div></div>`;return}
-  const head=`<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><h2 style="font-size:24px;margin:0">${L.length} contract${L.length===1?'':'s'}${F.cat!=='all'||F.campus!=='any'||F.move!=='any'||F.max||F.q?' match your filters':' in Provo & Orem'}</h2>${F.cat!=='all'||F.campus!=='any'||F.move!=='any'||F.max||F.q?'<button class="link" data-clear>Clear filters</button>':''}</div>`;
-  const cards=L.length?L.map(card).join(''):`<div class="panel" style="grid-column:1/-1;text-align:center"><h3>Nothing matches those filters</h3><p class="sub">Clear a filter, or let us look for you.</p><div style="display:flex;gap:10px;justify-content:center;margin-top:12px"><button class="btn ghost" data-clear>Clear filters</button><a class="btn" href="#/match">Match me</a></div></div>`;
-  el.innerHTML=head+(F.map?`<div class="mapwrap on"><div class="grid">${cards}</div><div id="map"></div></div>`:`<div class="grid">${cards}</div>`);
+  const c=CAT(F.cat), filt=!!(F.campus!=='any'||F.move!=='any'||F.max||F.q||(MODE==='web'&&F.src!=='All')), mt=$('#maptoggle');
+  const L=MODE==='web'?[]:filtered(VER()), W=filtered(WEB());
+  if(mt) mt.style.display=(L.length&&MODE!=='web')?'flex':'none';
+  const clear=filt?'<button class="link" data-clear>Clear filters</button>':'';
+  let h='';
+  if(MODE==='web'){
+    h+=W.length?`<div class="rhead"><h2>${W.length} listing${W.length===1?'':'s'} found around the web</h2>${clear}</div>
+      <div class="webnote" style="margin-top:10px">Not verified by StudentMatch. Details are copied from public posts and may be out of date. Never send money before touring and confirming with the complex office.</div>
+      <div class="grid">${W.map(card).join('')}</div>`:(filt?emptyBlock(c,true):webEmpty());
+  } else {
+    if(L.length){
+      const cards=L.map(card).join('');
+      h+=`<div class="rhead"><h2>${MODE==='cat'?esc(c[6]):'Contracts on StudentMatch'} <span class="meta" style="font-size:18px;font-weight:500">· ${L.length}${filt?' match your filters':''}</span></h2>${clear}</div>`;
+      h+=F.map?`<div class="mapwrap on"><div class="grid">${cards}</div><div id="map"></div></div>`:`<div class="grid">${cards}</div>`;
+    } else h+=emptyBlock(c,filt);
+    if(W.length){
+      const show=MODE==='home'?W.slice(0,4):W;
+      h+=`<div style="margin-top:44px"><div class="rhead"><h2>Also found around the web</h2><a class="link" href="#/web" data-t="web-see-all">See all ${WEB().length}</a></div>
+        <p class="sub">Public posts from KSL and other sites. Not verified. We'll check any of them for you.</p><div class="grid">${show.map(card).join('')}</div></div>`;
+    }
+  }
+  el.innerHTML=h;
   if(mt) mt.innerHTML=F.map?`${ic('grid',18,'#fff',2)} Show list`:`${ic('map',18,'#fff',2)} Show map`;
-  if(F.map) drawMap('map',L);
+  if(F.map&&L.length&&MODE!=='web') drawMap('map',L);
+}
+function vCat(k){const c=CAT(k);
+  return railHtml()+`<div class="wrap"><div class="cathero"><img src="${U(c[5],1600,560)}" alt=""><div><span class="kicker">${ic(c[2],16,'#fff',2.2)} ${esc(c[1])}</span><h1>${esc(c[3])}</h1><p>${esc(c[4])}</p></div></div></div>
+  <section class="wrap section" id="results-sec" style="padding-top:24px"><div id="results"><div class="grid"><div class="loading">Loading contracts…</div></div></div></section>
+  <section class="wrap section"><div class="ctaband"><img src="${U(PH.group,1600)}" alt="" loading="lazy"><div><h2>Leaving a contract like this?</h2><p>Post it free. We'll share it to the BYU/UVU groups and KSL and only send you students who fit.</p><a class="btn" href="#/post" data-t="cat-post" data-f="${esc(k)}">Post my contract</a></div></div></section>
+  <button class="maptoggle" id="maptoggle" data-map style="display:none">${ic('map',18,'#fff',2)} Show map</button>`;
+}
+function vWeb(){
+  return `<div class="wrap"><div class="cathero"><img src="${U(PH.street,1600,560)}" alt=""><div><span class="kicker">${ic('globe',16,'#fff',2.2)} KSL · Marketplace · more</span><h1>Around the web</h1><p>Housing contracts posted publicly on KSL Classifieds and other sites, gathered in one place by our team. They're not verified. Tap any one and we'll contact the poster and check it for you.</p></div></div>
+  <div class="seg" style="margin-top:18px">${['All','KSL','Marketplace','Other'].map(x=>`<button type="button" data-src="${x}" aria-pressed="${F.src===x}">${x}</button>`).join('')}</div></div>
+  <section class="wrap section" id="results-sec" style="padding-top:18px"><div id="results"><div class="grid"><div class="loading">Loading listings…</div></div></div></section>`;
 }
 let MAPS={};
 function drawMap(id,L,single){
@@ -620,21 +730,22 @@ function vDetail(id){
   const l=byId(id);
   if(!l) return `<div class="wrap section"><a class="back" href="#/">← All contracts</a><div class="emptyhero"><div><h2>This contract isn't listed anymore</h2><p class="sub">It may have been taken. Want us to find a similar one?</p><a class="btn" href="#/match" style="margin-top:12px">Match me</a></div><div class="collage"><img src="${U(PH.bed,800)}" alt=""><img src="${U(PH.living2,600)}" alt=""><img src="${U(PH.boxes,600)}" alt=""></div></div></div>`;
   const sv=saved().includes(l.id), taken=l.status==='taken', P=l.photos, seller=l.seller_first_name||'the seller';
-  const photos=P.length?`<div class="photogrid ${P.length<3?'one':''}">${P.slice(0,P.length<3?1:5).map((u,i)=>`<img src="${esc(u)}" alt="${esc(l.complex)} photo ${i+1}" data-lbopen="${i}">`).join('')}${P.length>1?`<button class="btn light sm all" data-lbopen="0">${ic('grid',16,'#1D2433',2)} Show all ${P.length} photos</button>`:''}</div>`:`<div class="nophotos"><b>${ini(l)}</b>Photos coming soon</div>`;
+  const photos=P.length?`<div class="photogrid ${P.length<3?'one':''}">${P.slice(0,P.length<3?1:5).map((u,i)=>`<img src="${esc(u)}" alt="${esc(l.complex)} photo ${i+1}" data-lbopen="${i}">`).join('')}${P.length>1?`<button class="btn light sm all" data-lbopen="0">${ic('grid',16,'#1D2433',2)} Show all ${P.length} photos</button>`:''}</div>`:`<div class="nophotos"><b>${l.unv?esc(srcName(l)):ini(l)}</b>${l.unv?'See photos on the original post':'Photos coming soon'}</div>`;
   const amen=l.amen.concat(/none/i.test(l.parking||'none')?[]:['Parking: '+l.parking]);
   return `<div class="wrap"><a class="back" href="#/">← All contracts</a>
   <h1 class="title">${esc(l.title||l.room+' room')} at ${esc(l.complex)}</h1>
   <div class="meta">${taken?'<b style="color:var(--ink)">Taken</b> · ':''}${l.dist?l.dist+' mi from '+esc(l.near)+' · ':''}${l.rule==='BYU'?'BYU-contracted':'Open to all'} · ${esc(l.gender)}${l.external?' · listed via '+esc(l.source||'Facebook'):''}</div>
   ${photos}
+  ${l.unv?`<div class="webnote" style="margin-top:14px"><b>Found on ${esc(srcName(l))}, not verified.</b> Details are copied from the public post and may be out of date. Tap “Have us check it” and we'll confirm with the poster. Never send money before touring and confirming with the complex office.</div>`:''}
   <div class="detail">
     <div style="display:flex;flex-direction:column;gap:26px;min-width:0">
-      <div class="seller"><div class="av">${esc(seller[0].toUpperCase())}</div><div><b style="font-size:18px">${l.external?'Posted by a student':'Listed by '+esc(seller)}</b><div class="meta">${l.why_leaving?'Leaving because: '+esc(l.why_leaving):'Student seller'}</div></div></div>
+      <div class="seller"><div class="av">${esc((l.unv?srcName(l):seller)[0].toUpperCase())}</div><div><b style="font-size:18px">${l.unv?'Posted on '+esc(srcName(l)):l.external?'Posted by a student':'Listed by '+esc(seller)}</b><div class="meta">${l.unv?'Not verified by StudentMatch yet'+(l.posted?' · found '+fmtD(l.posted):''):l.why_leaving?'Leaving because: '+esc(l.why_leaving):'Student seller'}</div></div></div>
       <div class="hl">
         <div>${ic('cal',26)}<span><b>${l.dates} · ${l.months} months</b><span>${l.months<=6?'Short-term contract, set by the complex':'Contract dates set by the complex'}</span></span></div>
-        <div>${ic('dollar',26)}<span><b>$${l.total}/mo total</b><span>Rent, utilities and monthly fees added up</span></span></div>
+        <div>${ic('dollar',26)}<span><b>$${l.total}/mo ${l.unv?'as listed':'total'}</b><span>${l.unv?'Utilities and fees may be extra. We can check.':'Rent, utilities and monthly fees added up'}</span></span></div>
         <div>${ic(l.rule==='BYU'?'byu':'check',26)}<span><b>${l.rule==='BYU'?'BYU-contracted housing':'Open to any student'}</b><span>${l.rule==='BYU'?'The office can only transfer it to a BYU student':'No school restriction'} · ${esc(l.gender)}</span></span></div>
       </div>
-      <div><h2 style="font-size:22px;margin:0 0 12px">What $${l.total} covers</h2><div class="box">
+      <div><h2 style="font-size:22px;margin:0 0 12px">${l.unv?'Cost as listed':'What $'+l.total+' covers'}</h2><div class="box">
         <div class="line"><span>Rent</span><span>$${l.rent}</span></div>
         ${l.utilities?`<div class="line"><span>Utilities (avg.)</span><span>$${l.utilities}</span></div>`:''}
         ${l.other?`<div class="line"><span>Internet / other monthly</span><span>$${l.other}</span></div>`:''}
@@ -642,14 +753,14 @@ function vDetail(id){
         ${l.fee?`<span class="meta" style="font-size:13px">Transfer fee: ${esc(l.fee)}</span>`:''}</div></div>
       ${amen.length?`<div><h2 style="font-size:22px;margin:0 0 14px">What this place offers</h2><div class="amen">${amen.map(a=>`<span>${ic(amenIcon(a),24)}${esc(a)}</span>`).join('')}</div></div>`:''}
       <div><h2 style="font-size:22px;margin:0 0 12px">Where you'll be</h2>${l.hasLoc?'<div id="minimap"></div>':`<div class="box"><span>${ic('pin',20)} ${l.dist?l.dist+' miles from '+esc(l.near)+' campus':'Near '+esc(l.near)}. Exact address shared after you connect.</span></div>`}</div>
-      ${l.external&&l.source_url?`<div><a href="${esc(l.source_url)}" target="_blank" rel="noopener" data-t="view-original" data-f="${esc(l.id)}" class="link">View the original post ↗</a></div>`:''}
+      ${!l.unv&&l.external&&l.source_url?`<div><a href="${esc(l.source_url)}" target="_blank" rel="noopener" data-t="view-original" data-f="${esc(l.id)}" class="link">View the original post ↗</a></div>`:''}
     </div>
     <div><div class="stick">
-      <div class="bigprice">$${l.total} <small>/ month total</small></div>
+      <div class="bigprice">$${l.total} <small>/ month ${l.unv?'as listed':'total'}</small></div>
       <div class="rowtiles"><div><label>Move in</label><span>${fmtD(l.start)}</span></div><div><label>Move out</label><span>${fmtD(l.end)}</span></div></div>
-      ${taken?`<button class="btn block dark" data-alert="taken-${esc(l.id)}">Email me similar contracts</button>`:`<a class="btn block" href="#/contact/${encodeURIComponent(l.id)}" data-t="contact-start" data-f="${esc(l.id)}">Contact ${esc(seller)}</a>`}
+      ${taken?`<button class="btn block dark" data-alert="taken-${esc(l.id)}">Email me similar contracts</button>`:l.unv?`<button class="btn block" data-verify="${esc(l.id)}">Have us check it for you</button>${l.source_url?`<a class="btn block ghost" href="${esc(l.source_url)}" target="_blank" rel="noopener" data-t="view-original" data-f="${esc(l.id)}">View on ${esc(srcName(l))} ↗</a>`:''}`:`<a class="btn block" href="#/contact/${encodeURIComponent(l.id)}" data-t="contact-start" data-f="${esc(l.id)}">Contact ${esc(seller)}</a>`}
       <div style="display:flex;gap:8px"><button class="btn ghost sm" style="flex:1" data-save="${esc(l.id)}">${sv?'♥ Saved':'♡ Save'}</button><button class="btn ghost sm" style="flex:1" data-share="${esc(l.id)}">Share</button></div>
-      <span class="meta" style="font-size:13px;text-align:center">You'll answer 3 quick questions so ${esc(seller)} only hears from students who can take the contract.</span>
+      <span class="meta" style="font-size:13px;text-align:center">${l.unv?`Free. We'll message the poster, confirm it's still available and the real monthly total, and get back to you within ${WS.replyTime}.`:`You'll answer 3 quick questions so ${esc(seller)} only hears from students who can take the contract.`}</span>
     </div></div>
   </div></div>`;
 }
@@ -749,7 +860,7 @@ function vMatch(){
   let res='';
   if(M.ran){ const R=(LISTINGS||[]).map(scoreL).filter(Boolean).sort((a,b)=>b.score-a.score);
     res=`<div class="panel" style="margin-top:18px"><h3>${R.length?`${R.length} contract${R.length===1?'':'s'} that fit`:'Nothing fits yet'}</h3><p class="sub">${R.length?'Ranked by budget, dates, length, campus and your must-haves.':'New contracts come in daily. Let us look for you.'}</p>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">${R.map(x=>`<a class="mrow" href="#/l/${encodeURIComponent(x.l.id)}" data-t="match-open" data-f="${esc(x.l.id)}"><div class="im">${x.l.photos[0]?`<img src="${esc(x.l.photos[0])}" alt="">`:ini(x.l)}</div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.l.complex)}</b><span class="score">${x.score}% fit</span></div><span class="meta">$${x.l.total}/mo · ${x.l.dates}</span><div class="why">${x.why.slice(0,3).map(w=>`<span>${/over|Different|Runs|Closer/.test(w)?'•':'✓'} ${esc(w)}</span>`).join('')}</div></div></a>`).join('')}</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">${R.map(x=>`<a class="mrow" href="#/l/${encodeURIComponent(x.l.id)}" data-t="match-open" data-f="${esc(x.l.id)}"><div class="im">${x.l.photos[0]?`<img src="${esc(x.l.photos[0])}" alt="">`:ini(x.l)}</div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.l.complex)}${x.l.unv?' <span class="tag warn" style="box-shadow:none">Unverified</span>':''}</b><span class="score">${x.score}% fit</span></div><span class="meta">$${x.l.total}/mo · ${x.l.dates}</span><div class="why">${x.why.slice(0,3).map(w=>`<span>${/over|Different|Runs|Closer/.test(w)?'•':'✓'} ${esc(w)}</span>`).join('')}</div></div></a>`).join('')}</div></div>
     <div class="panel" style="margin-top:14px;border:2px solid var(--brand)"><h3>Want us to find one for you?</h3><p class="sub">A person on our team checks the BYU/UVU groups, KSL and new posts every day and texts or emails you matches. Free.</p>
       <form id="mf" data-clarity-mask="true" novalidate style="margin-top:14px"><div class="row2"><div class="field"><label for="mn">First name</label><input id="mn" autocomplete="given-name"></div><div class="field"><label for="mp">Phone <span class="hint">(optional)</span></label><input id="mp" type="tel" autocomplete="tel"></div></div>
       <div class="field"><label for="me">Email</label><input id="me" type="email" autocomplete="email" placeholder="you@byu.edu"></div><div class="err" id="merr">Add a valid email.</div>
@@ -773,8 +884,8 @@ function vHow(){return `<div class="wrap"><div class="formwrap"><div><span class
    <div><b>Selling</b><p class="sub">Post your contract in about 3 minutes. We review it, post it here, and share it to the BYU and UVU housing groups and KSL. Buyers answer 3 quick questions (school, dates, budget) before we connect them with you.</p></div>
    <div><b>Looking</b><p class="sub">Every listing shows the total monthly cost. Contact a seller and we'll connect you within ${WS.replyTime}, or use Match me and we'll keep looking for you.</p></div>
    <div><b>The transfer</b><p class="sub">The complex office approves and completes every contract transfer, same as always. We never take payment or hold money.</p></div>
-   <div><b>Who we are</b><p class="sub">StudentMatch is a student-run pilot at BYU for Winter 2027. Some listings are collected from public posts (with the poster's permission) and link back to the original. Lifestyle photos and videos on this site are free stock images (Unsplash, Mixkit); listing photos come from the sellers.</p></div>
-   <div><b>Privacy & cookies</b><p class="sub">We count anonymous taps (with a random ID stored on your device, your device type and the site that sent you) to learn which features matter. If you accept cookies, we also use Google Analytics and Microsoft Clarity heatmaps and session replays; anything you type is hidden from replays. Your name and contact info are only shared with the specific buyer or seller you ask us to connect you with. <button class="link" data-consent-open>Change cookie settings</button></p></div>
+   <div><b>Who we are</b><p class="sub">StudentMatch is a student-run pilot at BYU for Winter 2027. Listings marked <b>Unverified</b> are copied by our team from public posts (like KSL Classifieds) and link back to the original; we remove any on request. Other listings come from sellers directly. Lifestyle photos and videos on this site are free stock images (Unsplash, Mixkit); listing photos come from the sellers.</p></div>
+   <div><b>Privacy & cookies</b><p class="sub">We count anonymous taps (with a random ID stored on your device, your device type and the site that sent you) to learn which features matter. If you accept cookies, we also use Google Analytics and Microsoft Clarity heatmaps and session replays; anything you type is hidden from replays. Questions you type to the assistant are saved so we can answer them and improve it. Your name and contact info are only shared with the specific buyer or seller you ask us to connect you with. <button class="link" data-consent-open>Change cookie settings</button></p></div>
    <a class="btn ghost" href="demo.html" data-t="how-demo">See the full app concept (sample data)</a></div></div>
    <div class="formside"><img src="${U(PH.talk,900)}" alt=""><div class="quote"><b>Student to student.</b><br>Built by BYU students who've been stuck with a contract too.</div></div></div></div>`}
 
@@ -794,6 +905,80 @@ function soonModal(id){const s=SOON.find(x=>x.id===id);track('soon-'+id);
   <form id="sf" data-clarity-mask="true" novalidate style="margin-top:12px"><div class="field"><label for="se">Email <span class="hint">(optional)</span></label><input id="se" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
   <button class="btn block" type="submit">${s.price?'Tell me if it launches':'Notify me'}</button></form>`);$('#sf').dataset.id=id;}
 
+function verifyModal(id){const l=byId(id); if(!l)return; track('verify-open',id);
+  openModal(`<h3>We'll check this one for you</h3><p class="sub">We'll message the poster on ${esc(srcName(l))}, confirm it's still available, the real monthly total and the transfer rules, then text or email you within ${WS.replyTime}. Free.</p>
+  <form id="vf" data-clarity-mask="true" novalidate style="margin-top:14px"><div class="row2"><div class="field"><label for="vn">First name</label><input id="vn" autocomplete="given-name"></div><div class="field"><label for="vp">Phone <span class="hint">(optional)</span></label><input id="vp" type="tel" autocomplete="tel"></div></div>
+  <div class="field"><label for="ve">Email</label><input id="ve" type="email" autocomplete="email" placeholder="you@byu.edu"></div>
+  <div class="field"><label for="vq">Anything to ask them? <span class="hint">(optional)</span></label><input id="vq" placeholder="Is parking included?"></div>
+  <div class="err" id="verr">Add a valid email.</div><button class="btn block" type="submit">Check it for me</button></form>`,PH.street); $('#vf').dataset.id=id;}
+
+/* ---------------- assistant (scripted answers + human follow-up; not an AI model) ---------------- */
+const ASK={msgs:[],stage:'',want:{},q:'',started:false};
+const ASKSTART=[['find','Find me a place'],['sell','Sell my contract'],['how','How do transfers work?'],['free','Is it free?'],['safe','Is this safe?'],['web','What is “Around the web”?']];
+const MORE=[['find','Find me a place'],['human','Ask a person'],['done','That\'s all']];
+const FAQ=[
+ ['byu',/byu.?contract|contracted|uvu student|not a (byu )?student|non.?student|only byu/i,"BYU-contracted complexes can generally only be transferred to BYU students. If you're at UVU or not a student, look for listings marked “Open to all”."],
+ ['fee',/fee|charge|cost to transfer/i,"Transfer fees vary by complex. When a seller tells us the fee, it's on the listing, and the complex office can confirm the exact amount. Sellers sometimes offer to pay it."],
+ ['time',/how (long|fast|soon)|hear back|respond/i,`We connect buyers and sellers within ${WS.replyTime}, usually sooner.`],
+ ['free',/free|cost|pay you|price of (the )?site|commission/i,"Yes, it's free for students. We never take payment or hold money. Rent and any transfer fee go through the complex office, same as always."],
+ ['safe',/safe|scam|legit|trust|fraud|venmo|zelle|deposit/i,"A few rules: tour before committing, only sign through the complex office, and never send a deposit to a person over Venmo or Zelle. Listings marked <b>Unverified</b> come from public posts we haven't checked yet. Tap “Have us check it” on any of them."],
+ ['how',/transfer|how (does|do) (it|this|that)|process|sublease|sublet|take over/i,"How a contract transfer works: 1) find a contract, 2) tour the room, 3) the complex office approves you and moves the contract into your name (they may charge a transfer fee). You never pay the seller directly, and we never handle money."],
+ ['web',/around the web|ksl|facebook|marketplace|other sites|scrap/i,"“Around the web” gathers housing contracts posted publicly on KSL and other sites so you don't have to check them all. They're unverified, and we'll contact the poster for you if you ask. <a href='#/web'>Open Around the web</a>"],
+ ['sell',/sell|leaving|get out of|post (my|a)|my contract|mission|internship|study abroad/i,"Post it in about 3 minutes. We'll share it to the BYU/UVU groups and KSL, then screen every buyer for you. <a href='#/post'>Post my contract</a>"],
+ ['find',/find|looking|need (a )?(place|room|housing|contract|apartment)|apartment|room|housing|move in|winter/i,null]
+];
+function askBot(t,opts){ASK.msgs.push({b:1,t,opts})}
+function askMe(t){ASK.msgs.push({b:0,t:esc(t)})}
+function renderAsk(){const body=$('#askbody'); if(!body)return; const last=ASK.msgs.length-1;
+  body.innerHTML=ASK.msgs.map((m,i)=>`<div class="b ${m.b?'bot':'me'}">${m.t}</div>${m.b&&m.opts&&i===last?`<div class="askopts">${m.opts.map(o=>`<button type="button" data-askopt="${o[0]}">${esc(o[1])}</button>`).join('')}</div>`:''}`).join('');
+  body.scrollTop=body.scrollHeight;}
+function openAsk(from){
+  if(!$('#askpanel'))return; $('#askpanel').classList.add('on'); track('assistant-open',from||'');
+  if(!ASK.started){ASK.started=true; askBot("Hi! I'm the StudentMatch assistant. I can help you find a contract, sell yours, or answer questions about transfers. Anything I can't answer goes to a real person on our team.",ASKSTART)}
+  renderAsk(); setTimeout(()=>{const i=$('#askq'); if(i&&innerWidth>640)i.focus()},50);
+}
+function askTopic(k){
+  if(k==='find'){ASK.stage='f-campus'; askBot('Happy to help. Which campus do you want to be near?',[['BYU','BYU'],['UVU','UVU'],['Either','Either']]); return}
+  if(k==='human'){ASK.stage='q-text'; askBot('Sure. Type your question and a person on our team will answer.'); return}
+  if(k==='done'){ASK.stage=''; askBot('Good luck with housing! I\'m here if you need anything.',ASKSTART); return}
+  const f=FAQ.find(x=>x[0]===k); if(f&&f[2]) askBot(f[2],MORE);
+}
+function askFind(){
+  const w=ASK.want, R=(LISTINGS||[]).filter(l=>l.status!=='taken'&&(w.near==='Either'||l.near===w.near)&&(!w.max||l.total<=w.max+25)&&(w.move==='any'||(l.start||'').slice(0,7)===w.move));
+  track('assistant-find',`${w.near}|${w.move}|${w.max}`);
+  const list=R.slice(0,3).map(l=>`<br>• <a href="#/l/${encodeURIComponent(l.id)}">${esc(l.complex)}</a>, $${l.total}/mo, ${l.dates}${l.unv?' (unverified, '+esc(srcName(l))+')':''}`).join('');
+  askBot(R.length?`I found ${R.length} that could work:${list}`:'Nothing posted fits that yet. New contracts are coming in every day.');
+  ASK.stage='f-keep'; askBot('Want a person on our team to keep looking (StudentMatch, KSL and the housing groups) and send you matches? Free.',[['yes','Yes, keep looking'],['no','No thanks']]);
+}
+function askOpt(v,label){
+  askMe(label); const st=ASK.stage;
+  if(st==='f-campus'){ASK.want.near=v; ASK.stage='f-month'; askBot('When do you need to move in?',[['2026-12','December'],['2027-01','January'],['2027-02','February'],['2027-05','May'],['any','Flexible']])}
+  else if(st==='f-month'){ASK.want.move=v; ASK.stage='f-budget'; askBot('Max per month, all in (rent + utilities)?',[['400','$400'],['500','$500'],['600','$600'],['0','$700+']])}
+  else if(st==='f-budget'){ASK.want.max=+v; ASK.stage=''; askFind()}
+  else if(st==='f-keep'){ if(v==='yes'){ASK.stage='m-email'; askBot('What email should we send matches to?')} else {ASK.stage=''; askBot('No problem. Anything else?',ASKSTART)} }
+  else if(st==='q-offer'){ if(v==='yes'){ASK.stage='q-email'; askBot('What email should we answer you at?')} else {ASK.stage=''; askBot('No problem. Anything else?',ASKSTART)} }
+  else if(v==='cancel'){ASK.stage=''; askBot('No problem. Anything else?',ASKSTART)}
+  else {ASK.stage=''; track('assistant-topic-'+v); askTopic(v)}
+  renderAsk();
+}
+function askText(text){
+  text=text.trim(); if(!text)return; askMe(text); const st=ASK.stage;
+  if(st==='m-email'||st==='q-email'){
+    if(!emailOk(text)){askBot("That doesn't look like an email. Try again?",[['cancel','Skip']]); ASK.stage=st; renderAsk(); return}
+    if(st==='m-email'){const w=ASK.want; submit('match_request',{email:text,details:`assistant | near ${w.near} | move ${w.move} | max ${w.max?'$'+w.max:'any'}`}); askBot(`Done. We'll email ${esc(text)} with matches, starting within ${WS.replyTime}.`,MORE)}
+    else {submit('question',{email:text,details:'assistant question: '+ASK.q}); askBot(`Thanks! A person on our team will answer at ${esc(text)} within ${WS.replyTime}.`,MORE)}
+    ASK.stage=''; renderAsk(); return}
+  track('assistant-free',text.slice(0,100));
+  if(st==='q-text'){ASK.q=text.slice(0,500); ASK.stage='q-email'; askBot('Got it. What email should we answer you at?'); renderAsk(); return}
+  const hit=FAQ.find(x=>x[1].test(text));
+  if(hit){ track('assistant-topic-'+hit[0],'typed'); ASK.stage=''; askTopic(hit[0]); }
+  else { ASK.q=text.slice(0,500); ASK.stage='q-offer'; track('assistant-fallback',text.slice(0,100)); askBot("Good question. I don't have an answer for that one yet. Want a person on our team to answer it?",[['yes','Yes, ask a person'],['no','No thanks']]) }
+  renderAsk();
+}
+document.body.insertAdjacentHTML('beforeend',`<button class="askbtn" id="askbtn" data-askopen="bubble" aria-label="Ask the StudentMatch assistant">${ic('chat',20,'#fff',2.2)}<span>Ask StudentMatch</span></button>
+<div class="askpanel" id="askpanel" role="dialog" aria-label="StudentMatch assistant"><div class="askhd"><div class="askav">${ic('chat',22,'#CF4429',2)}</div><div><b>StudentMatch Assistant</b><span>Instant answers · a real person follows up</span></div><button class="x" data-askclose aria-label="Close">×</button></div>
+<div class="askbody" id="askbody"></div><form id="askf" class="askin" data-clarity-mask="true" autocomplete="off"><input id="askq" placeholder="Ask about contracts, transfers, fees…" aria-label="Your question"><button class="btn sm" type="submit">Send</button></form></div>`);
+
 /* ---------------- analytics consent (Google Analytics + Microsoft Clarity) ---------------- */
 function loadThirdParty(){
   if(window.__wsLoaded)return; window.__wsLoaded=true;
@@ -808,7 +993,7 @@ function consentBar(){
   if(!WS.ga4&&!WS.clarity)return; let el=$('#consent'); if(!el){el=document.createElement('div');el.id='consent';el.className='consent';el.setAttribute('role','dialog');el.setAttribute('aria-label','Cookie settings');document.body.appendChild(el)}
   el.innerHTML=`<div><b>Help us improve StudentMatch?</b> We'd like to use cookies for Google Analytics and Microsoft Clarity (heatmaps and session replays) to see how the site is used. Anything you type is hidden from replays. We never sell data or run ads.</div>
    <div class="row"><button class="btn sm" data-consent="yes">Accept</button><button class="btn sm ghost" data-consent="no">Decline</button><a class="link" href="#/how" style="align-self:center">Details</a></div>`;
-  el.style.display='flex';
+  el.style.display='flex'; document.body.classList.add('hasc');
 }
 const CONSENT=store.get('ws_consent','');
 if(CONSENT==='yes')loadThirdParty(); else if(!CONSENT)setTimeout(consentBar,1500);
@@ -817,14 +1002,16 @@ if(CONSENT==='yes')loadThirdParty(); else if(!CONSENT)setTimeout(consentBar,1500
 async function route(){
   const h=location.hash.replace(/^#\/?/,''), [r,arg]=h.split('/'); const id=arg?decodeURIComponent(arg):'';
   const name=r||'home';
-  document.querySelectorAll('[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===(name==='l'||name==='contact'?'home':name)));
+  document.querySelectorAll('[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===(name==='l'||name==='contact'||name==='c'?'home':name)));
   const app=$('#app');
   Object.values(MAPS).forEach(m=>{try{m.remove()}catch(e){}}); MAPS={};
-  if(name==='home'){app.innerHTML=vHome(); setupHome(); await loadListings(); renderResults();}
+  if(name==='home'){MODE='home';F.cat='all';app.innerHTML=vHome(); setupHome(); await loadListings(); renderResults();}
+  else if(name==='c'){MODE='cat';F.cat=CATS.some(c=>c[0]===id)?id:'all';F.map=false;app.innerHTML=vCat(F.cat); await loadListings(); renderResults();}
+  else if(name==='web'){MODE='web';F.cat='all';app.innerHTML=vWeb(); await loadListings(); renderResults();}
   else { await loadListings();
     app.innerHTML = name==='l'?vDetail(id): name==='contact'?vContact(id): name==='post'?vPost(): name==='match'?vMatch(): name==='saved'?vSaved(): name==='how'?vHow(): vHome();
     if(name==='l'){const l=byId(id); if(l&&l.hasLoc) drawMap('minimap',[l],true);} }
-  track('view-'+name, id);
+  track(name==='c'?'view-cat-'+F.cat:'view-'+name, name==='c'?'':id);
   window.scrollTo(0,0);
 }
 function setupHome(){
@@ -842,18 +1029,24 @@ let LB={id:null,i:0};
 function lbShow(){const l=byId(LB.id);if(!l)return;$('#lbimg').src=l.photos[LB.i];$('#lbimg').alt=l.complex+' photo '+(LB.i+1);$('#lightbox').classList.add('on')}
 document.addEventListener('click',e=>{
   const t=e.target;
-  const cs=t.closest('[data-consent]'); if(cs){const v=cs.dataset.consent;store.set('ws_consent',v);track('consent-'+v);$('#consent').style.display='none';if(v==='yes')loadThirdParty();else if(window.__wsLoaded){toast('Saved. Reload the page to fully turn off analytics.')}return}
+  const cs=t.closest('[data-consent]'); if(cs){const v=cs.dataset.consent;store.set('ws_consent',v);track('consent-'+v);$('#consent').style.display='none';document.body.classList.remove('hasc');if(v==='yes')loadThirdParty();else if(window.__wsLoaded){toast('Saved. Reload the page to fully turn off analytics.')}return}
   if(t.closest('[data-consent-open]')){store.set('ws_consent','');consentBar();return}
   const sv=t.closest('[data-save]'); if(sv){e.preventDefault();e.stopPropagation();const id=sv.dataset.save;let s=saved();const on=!s.includes(id);s=on?s.concat(id):s.filter(x=>x!==id);store.set('ws_saved',s);track(on?'save':'unsave',id);toast(on?'Saved':'Removed');if(location.hash.startsWith('#/l/'))rerender(true);else{sv.innerHTML=HEART(on)};return}
   const sl=t.closest('[data-slide]'); if(sl){e.preventDefault();e.stopPropagation();const box=document.querySelector(`[data-slides="${CSS.escape(sl.dataset.id)}"]`);if(!box)return;const n=box.children.length;let i=(+box.dataset.i+ +sl.dataset.slide+n)%n;box.dataset.i=i;box.style.transform=`translateX(-${i*100}%)`;const dots=box.parentNode.querySelectorAll('.dots i');dots.forEach((d,j)=>d.classList.toggle('on',j===i));track('photo-next',sl.dataset.id);return}
   const ct=t.closest('[data-cat]'); if(ct){F.cat=ct.dataset.cat;document.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cat===F.cat));track('filter-'+F.cat);renderResults();return}
-  const ar=t.closest('[data-area]'); if(ar){const a=ar.dataset.area; if(a==='BYU'||a==='UVU'){F.campus=a;F.cat='all'}else{F.cat=a;F.campus='any'} track('area-'+a);document.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cat===F.cat));renderResults();$('#results-sec').scrollIntoView({behavior:'smooth'});return}
+  const ar=t.closest('[data-area]'); if(ar){const a=ar.dataset.area; track('area-'+a); location.hash='#/c/'+({BYU:'byu',UVU:'uvu'}[a]||a); return}
+  const vr=t.closest('[data-verify]'); if(vr){verifyModal(vr.dataset.verify);return}
+  const sr=t.closest('[data-src]'); if(sr){F.src=sr.dataset.src;document.querySelectorAll('[data-src]').forEach(b=>b.setAttribute('aria-pressed',b===sr));track('web-source-'+F.src);renderResults();return}
+  const ao=t.closest('[data-askopen]'); if(ao){openAsk(ao.dataset.askopen);return}
+  if(t.closest('[data-askclose]')){$('#askpanel').classList.remove('on');return}
+  if(t.closest('#askbody a')){track('assistant-link',t.closest('a').getAttribute('href'));if(innerWidth<=640)$('#askpanel').classList.remove('on')}
+  const aq=t.closest('[data-askopt]'); if(aq){askOpt(aq.dataset.askopt,aq.textContent);return}
   const md=t.closest('[data-mode]'); if(md){const sell=md.dataset.mode==='sell';document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b===md));$('#scfind').hidden=sell;$('#scsell').hidden=!sell;track('hero-mode-'+md.dataset.mode);return}
   if(t.closest('[data-hero-search]')){F.campus=$('#hc').value;F.move=$('#hm').value;F.max=+$('#hb').value;track('hero-search',`${F.campus}|${F.move}|${F.max}`);renderResults();$('#results-sec').scrollIntoView({behavior:'smooth'});return}
   if(t.closest('[data-focus-search]')){if(location.hash&&location.hash!=='#/'){location.hash='#/';setTimeout(()=>$('#searchcard')&&$('#searchcard').scrollIntoView({behavior:'smooth',block:'center'}),400)}else{$('#searchcard').scrollIntoView({behavior:'smooth',block:'center'})}return}
   if(t.closest('[data-mute]')){const v=$('#herovid');if(!v)return;v.muted=!v.muted;store.set('ws_muted',v.muted);t.closest('[data-mute]').textContent=v.muted?'🔇 Sound off':'🔊 Sound on';return}
   if(t.closest('[data-map]')){F.map=!F.map;track(F.map?'map-open':'map-close');renderResults();$('#results-sec').scrollIntoView({behavior:'smooth'});return}
-  if(t.closest('[data-clear]')){F.cat='all';F.q='';F.campus='any';F.move='any';F.max=0;rerender(true);return}
+  if(t.closest('[data-clear]')){F.q='';F.campus='any';F.move='any';F.max=0;F.src='All';rerender(true);return}
   const al=t.closest('[data-alert]'); if(al){alertModal(al.dataset.alert);return}
   const so=t.closest('[data-soon]'); if(so){soonModal(so.dataset.soon);return}
   if(t.closest('[data-x]')||t===$('#scrim')){closeModal();return}
@@ -887,6 +1080,10 @@ document.addEventListener('change',e=>{const t=e.target;
   if(t.dataset.pc){P.d[t.dataset.pc]=t.checked;store.set('ws_post',P);return}
 });
 document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;
+  if(f.id==='askf'){const i=$('#askq');askText(i.value);i.value='';return}
+  if(f.id==='vf'){const em=$('#ve').value.trim();if(!emailOk(em)){$('#verr').style.display='block';return}const l=byId(f.dataset.id);
+    submit('verify_request',{name:$('#vn').value.trim(),email:em,phone:$('#vp').value.trim(),listing_id:l.id,details:`${srcName(l)} ${l.source_url||''} | ${l.complex} | $${l.total}/mo as listed | ${l.dates} | ask: ${$('#vq').value.trim()||'-'} | school email: ${school(em)}`});
+    $('#modal').innerHTML=`<button class="x" data-x aria-label="Close">×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">We're on it</h3><p class="sub">We'll check with the poster and get back to ${esc(em)} within ${WS.replyTime}.</p></div>`;return}
   if(f.id==='cf'){const n=$('#cn').value.trim(),em=$('#ce').value.trim();if(!n||!emailOk(em)){$('#cerr').style.display='block';return}
     const l=byId(CH.id),Q=chatQs(l);submit('contact',{name:n,email:em,phone:$('#cp').value.trim(),listing_id:l.id,details:`${l.complex} ($${l.total}/mo, ${l.dates}) | answers: ${CH.a.map((a,i)=>Q[i].k+'='+Q[i].opts[a].l).join(', ')} | message: ${$('#cm').value.trim()||'-'} | school email: ${school(em)}`});CH.sent=true;rerender(true);return}
   if(f.id==='mf'){const em=$('#me').value.trim();if(!emailOk(em)){$('#merr').style.display='block';return}
@@ -898,7 +1095,7 @@ document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;
     if(em)submit('waitlist',{email:em,listing_id:f.dataset.id,details:'interested in '+f.dataset.id});else track('soon-confirm-noemail',f.dataset.id);
     $('#modal').innerHTML=`<button class="x" data-x aria-label="Close">×</button><div class="done"><div class="big">✓</div><h3 style="padding:0">Thanks, that helps</h3><p class="sub">${em?'We\'ll let you know if we build it.':'Your vote is counted.'}</p></div>`;return}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();$('#lightbox').classList.remove('on')} if($('#lightbox').classList.contains('on')){if(e.key==='ArrowRight')$('[data-lb="1"]').click();if(e.key==='ArrowLeft')$('[data-lb="-1"]').click()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();$('#lightbox').classList.remove('on');$('#askpanel')&&$('#askpanel').classList.remove('on')} if($('#lightbox').classList.contains('on')){if(e.key==='ArrowRight')$('[data-lb="1"]').click();if(e.key==='ArrowLeft')$('[data-lb="-1"]').click()}});
 track('visit@'+SRC);
 route();
 </script>
